@@ -1,7 +1,6 @@
 import Resume from "./resume";
 import Button from "./Button";
 import jspdf from "jspdf";
-// import path from "path";
 // import "../font/Proxima Nova Font.otf"
 const DownloadResume = () => {
   const handleChange = () => {
