@@ -2,75 +2,77 @@ const Resume = () => {
   return (
     <div id="mainDiv">
       <div>
-        <p className="c5 c47">
-          <span id="span1">
-            <img
-              id="img1"
-              alt=""
-              src="images/image1.png"
-              title="horizontal line"
-            />
-          </span>
-        </p>
+        <img id="img1" alt="" src="images/image1.png" title="horizontal line" />
       </div>
-      <p className="c44 c46">
+      {/* <p className="c44 c46">
         <span id="span2">
           <img id="img2" alt="" 
           src="images/image3.jpg" 
           title="" />
         </span>
-      </p>
+      </p> */}
       <a id="t.ad38166889113761e092799fa453e42f4838cb34"></a>
       <a id="t.0"></a>
       <table className="c33">
         <tbody>
           <tr className="c32">
             <td className="c43" colSpan={1} rowSpan={1}>
-              <p className="c30 title" id="h.x8fm1uorkbaw">
-                <span className="c40">ABHISHEK KATKAR</span>
-              </p>
-              <p className="c7 c44 subtitle" id="h.ymi089liagec">
-                <span className="c31">Full-Stack Web Developer</span>
-              </p>
+              <div style={{ display: "flex" }}>
+                <p className="c44  c46">
+                  <span id="span2">
+                    <img id="img2" alt="" src="images/image3.jpg" title="" />
+                  </span>
+                </p>
+                <div>
+                  <p className="c30 title" id="h.x8fm1uorkbaw">
+                    <span className="c40">ABHISHEK KATKAR</span>
+                  </p>
+                  <p className="c7 subtitle" id="h.ymi089liagec">
+                    <span className="c31">Full-Stack Web Developer</span>
+                  </p>
+                </div>
+              </div>
             </td>
             <td className="c23" colSpan={1} rowSpan={1}>
-              <p className="c2">
-                <span className="c10">katkarabhi91@gmail.com</span>
-              </p>
-              <p className="c2">
-                <span className="c10">
-                  +91 7083661959
-                  <br />
-                  LinkedIn-{" "}
-                </span>
-                <span className="c8 c19 c26">
-                  <a
-                    className="c27"
-                    href="https://www.google.com/url?q=https://www.linkedin.com/in/abhishek-katkar&amp;sa=D&amp;source=editors&amp;ust=1649422496390031&amp;usg=AOvVaw24Ppct2YmeEtIDM7gAcO3j"
-                  >
-                    abhishek-katkar
-                  </a>
-                </span>
-                <span className="c12 c10">&nbsp;</span>
-              </p>
-              <p className="c2">
-                <span className="c10">Satara</span>
-                <span className="c10">, </span>
-                <span className="c10">Maharashtra</span>
-              </p>
-              <p className="c2">
-                <span className="c10">Github</span>
-                <span className="c10">- </span>
-                <span className="c8 c19 c26">
-                  <a
-                    className="c27"
-                    href="https://www.google.com/url?q=https://github.com/abhikatkar&amp;sa=D&amp;source=editors&amp;ust=1649422496390756&amp;usg=AOvVaw3sDkpDe13qm2pdk8W_2tRe"
-                  >
-                    abhikatkar
-                  </a>
-                </span>
-                <span className="c10">&nbsp;</span>
-              </p>
+              <div id="userDet">
+                <p className="c2">
+                  <span className="c10">katkarabhi91@gmail.com</span>
+                </p>
+                <p className="c2">
+                  <span className="c10">
+                    +91 7083661959
+                    <br />
+                    LinkedIn-{" "}
+                  </span>
+                  <span className="c8 c19 c26">
+                    <a
+                      className="c27"
+                      href="https://www.google.com/url?q=https://www.linkedin.com/in/abhishek-katkar&amp;sa=D&amp;source=editors&amp;ust=1649422496390031&amp;usg=AOvVaw24Ppct2YmeEtIDM7gAcO3j"
+                    >
+                      abhishek-katkar
+                    </a>
+                  </span>
+                  <span className="c12 c10">&nbsp;</span>
+                </p>
+                <p className="c2">
+                  <span className="c10">Satara</span>
+                  <span className="c10">, </span>
+                  <span className="c10">Maharashtra</span>
+                </p>
+                <p className="c2">
+                  <span className="c10">Github</span>
+                  <span className="c10">- </span>
+                  <span className="c8 c19 c26">
+                    <a
+                      className="c27"
+                      href="https://www.google.com/url?q=https://github.com/abhikatkar&amp;sa=D&amp;source=editors&amp;ust=1649422496390756&amp;usg=AOvVaw3sDkpDe13qm2pdk8W_2tRe"
+                    >
+                      abhikatkar
+                    </a>
+                  </span>
+                  <span className="c10">&nbsp;</span>
+                </p>
+              </div>
             </td>
           </tr>
           <tr className="c29">
