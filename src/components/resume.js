@@ -1,16 +1,45 @@
+import { useState } from "react";
+
 const Resume = () => {
+  const [details, addDetails] = useState({
+    personal: {
+      email: "",
+      mob: "",
+      linkedin: "",
+      address: "",
+      github: "",
+    },
+    summary: "",
+    projects: [
+      {
+        name: "",
+        description: "",
+        gitLink: "",
+        features: [],
+        techStack: [],
+        areasOfResp: [],
+        solo: false,
+        team: 3,
+      },
+    ],
+    education: [
+      {
+        course: "",
+        institute: "",
+        start: "",
+        end: "",
+      },
+    ],
+    techSkills: [],
+    softSkills: [],
+    accomplishments: [],
+    interests: [],
+  });
   return (
     <div id="mainDiv">
       <div>
         <img id="img1" alt="" src="images/image1.png" title="horizontal line" />
       </div>
-      {/* <p className="c44 c46">
-        <span id="span2">
-          <img id="img2" alt="" 
-          src="images/image3.jpg" 
-          title="" />
-        </span>
-      </p> */}
       <a id="t.ad38166889113761e092799fa453e42f4838cb34"></a>
       <a id="t.0"></a>
       <table className="c33">
@@ -99,9 +128,7 @@ const Resume = () => {
                 <span className="c8 c3">UDEMY clone</span>
                 <span className="c3">&nbsp;</span>
                 <sup>
-                  <a href="#cmnt1" id="cmnt_ref1">
-                    [a]
-                  </a>
+                  
                 </sup>
                 <span className="c3">|</span>
                 <span className="c3">&nbsp;</span>
