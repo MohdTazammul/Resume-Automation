@@ -1,12 +1,13 @@
 const mongoose = require("mongoose");
 
 const resumeSchema = mongoose.Schema({
-    // user:{
-    //     type:mongoose.Schema.Types.ObjectId,
-    //     ref:"user",
-    //     required:true
-    // },
+    user:{
+        type:mongoose.Schema.Types.ObjectId,
+        ref:"user",
+        required:true
+    },
     personal: {
+        name:{type:String, required:true},
         email: {type:String, required:true},
         mob: {type:String, required:true},
         linkedin:{type:String, required:true},

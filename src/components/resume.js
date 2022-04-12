@@ -1,40 +1,17 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 const Resume = () => {
-  const [details, addDetails] = useState({
-    personal: {
-      email: "",
-      mob: "",
-      linkedin: "",
-      address: "",
-      github: "",
-    },
-    summary: "",
-    projects: [
-      {
-        name: "",
-        description: "",
-        gitLink: "",
-        features: [],
-        techStack: [],
-        areasOfResp: [],
-        solo: false,
-        team: 3,
-      },
-    ],
-    education: [
-      {
-        course: "",
-        institute: "",
-        start: "",
-        end: "",
-      },
-    ],
-    techSkills: [],
-    softSkills: [],
-    accomplishments: [],
-    interests: [],
-  });
+  const [details, addDetails] = useState({});
+  useEffect(() => {
+    axios
+      .get("http://localhost:4567/resume/6252c636afaa2f28ae46bc54")
+      .then((res) => {
+        addDetails(res.data);
+      })
+      .catch((e) => console.log(e.message));
+  }, []);
+  console.log(details);
   return (
     <div id="mainDiv">
       <div>
@@ -65,38 +42,30 @@ const Resume = () => {
             <td className="c23" colSpan={1} rowSpan={1}>
               <div id="userDet">
                 <p className="c2">
-                  <span className="c10">katkarabhi91@gmail.com</span>
+                  <span className="c10">{details?.personal?.email}</span>
                 </p>
                 <p className="c2">
                   <span className="c10">
-                    +91 7083661959
+                    {details?.personal?.mob}
                     <br />
                     LinkedIn-{" "}
                   </span>
                   <span className="c8 c19 c26">
-                    <a
-                      className="c27"
-                      href="https://www.google.com/url?q=https://www.linkedin.com/in/abhishek-katkar&amp;sa=D&amp;source=editors&amp;ust=1649422496390031&amp;usg=AOvVaw24Ppct2YmeEtIDM7gAcO3j"
-                    >
-                      abhishek-katkar
+                    <a className="c27" href="#">
+                      {details?.personal?.linkedin}
                     </a>
                   </span>
                   <span className="c12 c10">&nbsp;</span>
                 </p>
                 <p className="c2">
-                  <span className="c10">Satara</span>
-                  <span className="c10">, </span>
-                  <span className="c10">Maharashtra</span>
+                  <span className="c10">{details?.personal?.address}</span>
                 </p>
                 <p className="c2">
                   <span className="c10">Github</span>
                   <span className="c10">- </span>
                   <span className="c8 c19 c26">
-                    <a
-                      className="c27"
-                      href="https://www.google.com/url?q=https://github.com/abhikatkar&amp;sa=D&amp;source=editors&amp;ust=1649422496390756&amp;usg=AOvVaw3sDkpDe13qm2pdk8W_2tRe"
-                    >
-                      abhikatkar
+                    <a className="c27" href="#">
+                      {details?.personal?.github}
                     </a>
                   </span>
                   <span className="c10">&nbsp;</span>
@@ -113,144 +82,89 @@ const Resume = () => {
               </p>
               <p className="c5">
                 <span className="c1">
-                  Full-stack web developer with a passionate goal to learn and
-                  grow in a tech environment. Energetic and ambitious
-                  professional who has developed a mature and responsible
-                  approach to any task that is allocated. Looking for
-                  challenging opportunities to leverage and hone skills.
+                  {details.summary}
                   <br />
                 </span>
               </p>
               <p className="c5">
                 <span className="c14">PROJECTS </span>
               </p>
-              <p className="c5">
-                <span className="c8 c3">UDEMY clone</span>
-                <span className="c3">&nbsp;</span>
-                <sup>
-                  
-                </sup>
-                <span className="c3">|</span>
-                <span className="c3">&nbsp;</span>
-                <span id="span3">
-                  <img id="img3" alt="" src="images/image2.png" />
-                </span>
-              </p>
-              <p className="c5">
-                <span>A web application</span>
-                <span className="c1">
-                  &nbsp;providing the user a wide range of courses to learn
-                  several topics of their choice.
-                </span>
-              </p>
-              <p className="c5">
-                <span className="c3">Features</span>
-                <span className="c1">:</span>
-              </p>
-              <ul className="c21 lst-kix_xmzdhu5lret0-0 start">
-                <li className="c0 li-bullet-0">
-                  <span className="c1">Landing page with CSS effects</span>
-                </li>
-                <li className="c0 li-bullet-0">
-                  <span className="c1">
-                    Home page with layout changing effects
-                  </span>
-                </li>
-                <li className="c0 li-bullet-0">
-                  <span className="c1">Sign In, Login feature</span>
-                </li>
-                <li className="c0 li-bullet-0">
-                  <span className="c1">User authentication</span>
-                </li>
-              </ul>
-              <p className="c5">
-                <span className="c3">Tech Stack:</span>
-                <span className="c1">&nbsp;HTML | CSS | Javascript </span>
-              </p>
-              <p className="c5">
-                <span className="c3 c6">Areas of responsibility:</span>
-              </p>
-              <ul className="c21 lst-kix_es1hyzs1hy8g-0 start">
-                <li className="c0 li-bullet-0">
-                  <span className="c1">
-                    Built authentication and integrated it with the frontend.
-                  </span>
-                </li>
-                <li className="c0 li-bullet-0">
-                  <span className="c1">Created the Home page. </span>
-                </li>
-                <li className="c0 li-bullet-0">
-                  <span className="c1">
-                    Developed a Sign In, Login page for users.
-                  </span>
-                </li>
-              </ul>
-              <p className="c5">
-                <span className="c1">
-                  A collaborative project built by a team of 5 executed in 5
-                  days.
-                </span>
-              </p>
-              <p className="c5">
-                <span className="c3 c8">Movies App clone</span>
-                <span className="c3">&nbsp;|</span>
-                <sup>
-                  <a href="#cmnt2" id="cmnt_ref2">
-                    [b]
-                  </a>
-                </sup>
-                <span className="c3">&nbsp;</span>
-                <span id="span4">
-                  <img id="img4" alt="" src="images/image2.png" title="" />
-                </span>
-              </p>
-              <p className="c5">
-                <span>A web application </span>
-                <span className="c1">to watch a variety of movies.</span>
-              </p>
-              <p className="c5">
-                <span className="c3">Features</span>
-                <span className="c1">:</span>
-              </p>
-              <ul className="c21 lst-kix_xmzdhu5lret0-0">
-                <li className="c0 li-bullet-0">
-                  <span className="c1">Search bar in home page</span>
-                </li>
-                <li className="c0 li-bullet-0">
-                  <span className="c1">
-                    Direct the user to a different page with search results
-                  </span>
-                </li>
-                <li className="c0 li-bullet-0">
-                  <span className="c1">Debouncing in the Search engine</span>
-                </li>
-                <li className="c0 li-bullet-0">
-                  <span className="c1">Home page with sliding effects</span>
-                </li>
-              </ul>
-              <p className="c5">
-                <span className="c3">Tech Stack:</span>
-                <span className="c1">&nbsp;HTML | CSS | Javascript </span>
-              </p>
-              <p className="c5">
-                <span className="c6 c3">Areas of responsibility:</span>
-              </p>
-              <ul className="c21 lst-kix_es1hyzs1hy8g-0">
-                <li className="c0 li-bullet-0">
-                  <span>Built Home page with dynamic functionalities</span>
-                </li>
-                <li className="c0 li-bullet-0">
-                  <span className="c1">
-                    Developed search bar with debouncing
-                  </span>
-                </li>
-              </ul>
-              <p className="c5">
-                <span className="c1">
-                  A solo project executed in 4 days.
-                  <br />
-                </span>
-              </p>
+              {details?.projects?.map((element) => {
+                return (
+                  <>
+                    <p className="c5">
+                      <span className="c8 c3">{element.name}</span>
+                      <span className="c3">&nbsp;</span>
+                      <span className="c3">|</span>
+                      <span className="c3">&nbsp;</span>
+                      <span id="span3">
+                        <img
+                          id="img3"
+                          alt=""
+                          src="images/image2.png"
+                          href="www.youtube.com"
+                        />
+                      </span>
+                    </p>
+                    <p className="c5">
+                      <span>A web application</span>
+                      <span className="c1">
+                        &nbsp;providing the user a wide range of courses to
+                        learn several topics of their choice.
+                      </span>
+                    </p>
+                    <p className="c5">
+                      <span className="c3">Features</span>
+                      <span className="c1">:</span>
+                    </p>
+                    {element.features.map((elem)=>{
+                      return <>
+                      <ul className="c21 lst-kix_xmzdhu5lret0-0 start">
+                        <li className="c0 li-bullet-0">
+                          <span className="c1">
+                            {elem}
+                          </span>
+                        </li>
+                      </ul>
+                    </>
+                    })                      
+                    
+                    }
+                    <p className="c5">
+                      <span className="c3">Tech Stack:</span>
+                      
+                      <span className="c1">&nbsp;{element.techStack.map((c)=>c.toUpperCase()).join(" | ")}</span>
+                      
+                      
+                    </p>
+                    <p className="c5">
+                      <span className="c3 c6">Areas of responsibility:</span>
+                    </p>
+                    <ul className="c21 lst-kix_es1hyzs1hy8g-0 start">
+                      <li className="c0 li-bullet-0">
+                        <span className="c1">
+                          Built authentication and integrated it with the
+                          frontend.
+                        </span>
+                      </li>
+                      <li className="c0 li-bullet-0">
+                        <span className="c1">Created the Home page. </span>
+                      </li>
+                      <li className="c0 li-bullet-0">
+                        <span className="c1">
+                          Developed a Sign In, Login page for users.
+                        </span>
+                      </li>
+                    </ul>
+                    <p className="c5">
+                      <span className="c1">
+                        A collaborative project built by a team of 5 executed in
+                        5 days.
+                      </span>
+                    </p>
+                  </>
+                );
+              })}
               <p className="c5 c15">
                 <span className="c1"></span>
               </p>
@@ -301,7 +215,7 @@ const Resume = () => {
               </h1>
               <p className="c5">
                 <span className="c1">
-                  HTML | CSS | MongoDb | ExpressJS | React | Redux
+                 {details?.techSkills?.join(" | ")}
                 </span>
               </p>
               <p className="c5 c22">
@@ -313,7 +227,7 @@ const Resume = () => {
               </h1>
               <p className="c5">
                 <span className="c1">
-                  Problem Solver | Quick Learner &nbsp;| Leadership |
+                {details?.softSkills?.join(" | ")}
                 </span>
               </p>
               <p className="c5 c22">
@@ -345,7 +259,7 @@ const Resume = () => {
                 <span>INTERESTS</span>
               </h1>
               <p className="c28">
-                <span>Cycling| Cooking | Trekking</span>
+                <span>{details?.interests?.join(" | ")}</span>
               </p>
             </td>
           </tr>

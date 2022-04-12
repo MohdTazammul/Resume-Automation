@@ -2,6 +2,7 @@ import Resume from "./resume";
 import Button from "./Button";
 import jspdf from "jspdf";
 // import "../font/Proxima Nova Font.otf"
+
 const DownloadResume = () => {
   const handleChange = () => {
     var doc = new jspdf("p", "pt", "a4");

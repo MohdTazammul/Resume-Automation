@@ -1,9 +1,12 @@
 const express = require("express");
 const connect = require("../src/configs/db");
 require("dotenv").config();
-const PORT = process.env.PORT || 7000;
+const PORT = process.env.PORT || 4567;
 const app = express();
 const Resume = require("../src/models/resume.model");
+
+var cors = require('cors')
+app.use(cors());
 
 app.use(express.json());
 
@@ -28,6 +31,15 @@ app.post("/resume", async(req, res)=>{
 app.get("/resume", async(req, res)=>{
     try{
         const resume = await Resume.find().lean().exec();
+        res.send(resume);
+    }
+    catch(e){
+        res.send(e.message);
+    }
+})
+app.get("/resume/:id", async(req, res)=>{
+    try{
+        const resume = await Resume.findById(req.params.id).lean().exec();
         res.send(resume);
     }
     catch(e){
