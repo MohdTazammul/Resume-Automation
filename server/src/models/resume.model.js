@@ -20,6 +20,7 @@ const resumeSchema = mongoose.Schema({
           name: {type:String, required:true},
           description: {type:String, required:true},
           gitLink: {type:String, required:true},
+          liveLink: {type:String, required:true},
           features: [{type:String, required:true}],
           techStack: [{type:String, required:true}],
           areasOfResp: [{type:String, required:true}],
