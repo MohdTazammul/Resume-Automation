@@ -19,7 +19,9 @@
   }
   
   .img img {
+    width: 250px;
     height: 250px;
+    object-fit: cover;
     /* border: 1px solid black; */
     opacity: 1;
     display: block;
