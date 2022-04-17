@@ -1,18 +1,41 @@
 const mongoose = require("mongoose");
 
 const resumeSchema = mongoose.Schema({
-    user:{
-        type:mongoose.Schema.Types.ObjectId,
-        ref:"user",
-        required:true
-    },
+  user: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "user",
+    required: true,
+  },
+  personal: {
+    profilePic: { type: String, required: true },
+    name: { type: String, required: true },
+    tagLine:{ type: String, required: true },
+    email: { type: String, required: true },
+    mob: { type: String, required: true },
+    linkedin: { type: String, required: true },
+    address: { type: String, required: true },
+    github: { type: String, required: true },
+  },
+  summary: { type: String, required: true },
+  projects: [
+    {
+      name: { type: String, required: true },
+      description: { type: String, required: true },
+      gitLink: { type: String, required: true },
+      liveLink: { type: String, required: true },
+      features: [{ type: String, required: true }],
+      techStack: [{ type: String, required: true }],
+      areasOfResp: [{ type: String, required: true }],
+      solo: false,
+      team: { type: Number, required: false },
+    }],
     personal: {
         name:{type:String, required:true},
         email: {type:String, required:true},
         mob: {type:String, required:true},
         linkedin:{type:String, required:true},
         address: {type:String, required:true},
-        github: {type:String, required:true},
+        github: {type:String, required:true}
       },
       summary: {type:String, required:true},
       projects: [
