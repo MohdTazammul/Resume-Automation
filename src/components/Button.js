@@ -1,11 +1,10 @@
-
+import "../styles/Button.css"
 const Button = ({click}) =>{
     return (
        <>
-        <div>
+        <div id="mainBtn">
             <a onClick={click} className="myBtn" download><span>Download</span><span>PDF</span></a>
-            {/* <a download><span>Download</span><span>WORD</span></a>
-            <a download><span>Download</span><span>XSL</span></a> */}
+
         </div>
        </>
     )
