@@ -3,24 +3,18 @@ import ResponsiveAppBar from "./components/navbar";
 import Form from "./components/form/form";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import DownloadResume from "./components/downloadResume";
-import "./App.css";
-
+import { useState } from "react";
+import UserAuth from "./components/userAuth";
+import AddRoute from "./components/routes";
 
 function App() {
+  const [login, setLogin] = useState(false)
   return (
-  <BrowserRouter>
-    <div className="App">
-    <ResponsiveAppBar />
-     <Routes>
-     <Route path="/home" element={<DownloadResume />}>
-     </Route>  
-     
-     <Route path="/form" element={<Form />}>
-     </Route>
-      {/* <Form /> */}
-     </Routes>
+    <div style={{width:"100%", display:"flex", justifyContent:"center", alignItems:"center", flexDirection:"column"}} className="App">
+      <ResponsiveAppBar />
+      <AddRoute/>
+      {/* { login ? <DownloadResume /> :  <UserAuth/>} */}
     </div>
-  </BrowserRouter>
   );
 }
 
