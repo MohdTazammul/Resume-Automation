@@ -730,9 +730,8 @@ table {
 
 #outerDiv {
   border: 5px solid green;
-  margin-left: 70%;
   width: 100%;
-  /* margin:auto */
+  margin:auto
 }
 .c38 {
   /* border: 1px solid red; */
