@@ -1,7 +1,7 @@
 import {Route, Routes} from "react-router-dom";
 import UserAuth from "../components/userAuth"
 import SignIn from "../components/signin"
-import SignUp from "./signup";
+import SignUp from "../components/signup";
 import DownloadResume from "./downloadResume";
 
 export default function AddRoute(){
@@ -14,7 +14,6 @@ export default function AddRoute(){
                 <Route path="/signup" element={<SignUp/>}/>
                 <Route path="/downloadresume" element={<DownloadResume/>}/>
             </Routes>
-            
         </>
     )
 
