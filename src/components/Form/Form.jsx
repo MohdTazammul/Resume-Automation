@@ -595,9 +595,11 @@ const Form = () => {
 
         </div>
       </div>
-      <Button onClick={submitForm} className='genrate-resume-btn' color="success" variant="contained" endIcon={<ChevronRightIcon />}>
+     <div className='submit-btn-cont'>
+     <Button onClick={submitForm} className='genrate-resume-btn' color="success" variant="contained" endIcon={<ChevronRightIcon />}>
         Genrate Resume
       </Button>
+     </div>
     </div>
   )
 }

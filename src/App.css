@@ -1,5 +1,5 @@
 .App{
-    width: 100%;
+    width: 100vw !important;
 }
 p.lorem-text {
     text-align: justify;

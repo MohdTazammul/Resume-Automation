@@ -2,7 +2,6 @@
     /* border: 1px solid red; */
     width: 90%;
     height: 400px;
-    margin: auto;
     margin-top: 80px;
     margin-bottom: 80px;
     box-sizing: border-box;
@@ -277,4 +276,10 @@ text-align: justify;
 {
   width: 50%;
   margin: 20px 0px !important;
+  margin: auto;
+}
+.submit-btn-cont
+{
+  display: flex;
+  justify-content: center;
 }
