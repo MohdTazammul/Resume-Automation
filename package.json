@@ -9,7 +9,21 @@
     "@testing-library/jest-dom": "^5.16.4",
     "@testing-library/react": "^12.1.4",
     "@testing-library/user-event": "^13.5.0",
+<<<<<<< Updated upstream
     "framer-motion": "^3.10.6",
+=======
+    "axios": "^0.26.1",
+    "bcryptjs": "^2.4.3",
+    "cloudinary": "^1.29.1",
+    "cors": "^2.8.5",
+    "express": "^4.17.3",
+    "focus-trap-react": "^8.9.2",
+    "framer-motion": "^3.10.6",
+    "is-github-url": "^1.2.2",
+    "jspdf": "^2.5.1",
+    "mongoose": "^6.2.10",
+    "multer": "^1.4.4",
+>>>>>>> Stashed changes
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
     "react-scripts": "5.0.0",
