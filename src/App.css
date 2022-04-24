@@ -1,14 +1,8 @@
-<<<<<<< Updated upstream
-.App {
-  text-align: center;
-=======
 .App{
   /* margin-top: 20vh; */
     width: 100vw !important;
     /* border: 1px solid blue; */
->>>>>>> Stashed changes
 }
-
 .App-logo {
   height: 40vmin;
   pointer-events: none;

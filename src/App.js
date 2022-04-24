@@ -1,18 +1,8 @@
-<<<<<<< Updated upstream
-import logo from './logo.svg';
-import './App.css';
-import Form from './components/Form';
-
-function App() {
-  return (
-      <Form /> 
-       );
-=======
-import ResponsiveAppBar from "./components/navbar";
+// import ResponsiveAppBar from "./components/navbar";
 // import DownloadResume from "./components/DownloadResume/downloadResume";
 import Form from "./components/Form";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import DownloadResume from "./components/downloadResume";
+// import DownloadResume from "./components/downloadResume";
 import "./App.css";
 
 
@@ -20,10 +10,10 @@ function App() {
   return (
   <BrowserRouter>
     <div className="App">
-    <ResponsiveAppBar />
+    {/* <ResponsiveAppBar /> */}
      <Routes>
-     <Route path="/home" element={<DownloadResume />}>
-     </Route>  
+     {/* <Route path="/home" element={<DownloadResume />}>
+     </Route>   */}
      
      <Route path="/form" element={<Form />}>
      </Route>
@@ -31,7 +21,6 @@ function App() {
     </div>
   </BrowserRouter>
   );
->>>>>>> Stashed changes
 }
 
 export default App;
