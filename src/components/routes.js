@@ -3,7 +3,7 @@ import UserAuth from "../components/userAuth"
 import SignIn from "../components/signin"
 import SignUp from "../components/signup";
 import DownloadResume from "./downloadResume";
-
+import Form from "./form/form";
 export default function AddRoute(){
 
     return (
@@ -13,6 +13,7 @@ export default function AddRoute(){
                 <Route path="/signin" element={<SignIn/>}/>
                 <Route path="/signup" element={<SignUp/>}/>
                 <Route path="/downloadresume" element={<DownloadResume/>}/>
+                <Route path="/form" element={<Form/>}/>
             </Routes>
         </>
     )
