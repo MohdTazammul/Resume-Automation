@@ -3,7 +3,7 @@ import UserAuth from "../components/userAuth"
 import SignIn from "../components/signin"
 import SignUp from "../components/signup";
 import DownloadResume from "./downloadResume";
-import Form from "./form/form";
+import Form from "./Form/Form.jsx";
 export default function AddRoute(){
 
     return (

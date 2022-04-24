@@ -1,6 +1,6 @@
 import ResponsiveAppBar from "./components/navbar";
 // import DownloadResume from "./components/DownloadResume/downloadResume";
-import Form from "./components/form/form";
+import Form from "./components/Form/Form";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import DownloadResume from "./components/downloadResume";
 import { useState } from "react";
