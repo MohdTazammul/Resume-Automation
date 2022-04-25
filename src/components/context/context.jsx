@@ -4,7 +4,11 @@ const TokenContext = createContext();
 
 const ContextProvider = ({children})=>{
     const [token, setToken] = useState("initial token");
-    return <TokenContext.Provider value={{token, setToken}}>
+
+    const set =(value)=>{
+        setToken(value);
+    }
+    return <TokenContext.Provider value={{token, set}}>
         {children}
     </TokenContext.Provider> 
 }

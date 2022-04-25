@@ -38,9 +38,10 @@ function Copyright(props) {
 const theme = createTheme();
 
 export default function SignIn() {
-  const { token, setToken } = useContext(TokenContext);
+  const { token, set } = useContext(TokenContext);
 
   const navigate = useNavigate();
+
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -54,9 +55,9 @@ export default function SignIn() {
         if (res.data.err) {
           alert(res.data.err);
         } else {
-          setToken(res.data.token);
+          set(res.data.token);
           console.log("new token = ", token);
-          // navigate("/createform");
+          navigate("/createform");
         }
       })
       .catch((e) => {

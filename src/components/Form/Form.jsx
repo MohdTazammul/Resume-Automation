@@ -22,8 +22,9 @@ import Switch from '@mui/material/Switch';
 import Link from '@mui/material/Link';
 import GitHubIcon from '@mui/icons-material/GitHub';
 import LanguageIcon from '@mui/icons-material/Language';
-
 import "../form/Form.css";
+import {useContext} from "react";
+import { TokenContext } from "../context/context";
 
 var isGithubUrl = require('is-github-url');
 
@@ -320,6 +321,8 @@ const Form = () => {
 
   }
 
+  const {token} = useContext(TokenContext);
+  console.log(token);
   return (
     <div className='form-container'>
       <div className='header-section'>

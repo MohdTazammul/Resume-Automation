@@ -8,7 +8,7 @@ import { useContext } from "react";
 const DownloadResume = () => {
 
   const {token} = useContext(TokenContext);
-  console.log("token = ", token)
+  console.log("token = ", token);
   const handleChange = () => {
     var doc = new jspdf("p", "pt", "a4");
     const myFont = require("../font/Proxima Nova Font.otf");
