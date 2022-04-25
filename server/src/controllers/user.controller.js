@@ -2,10 +2,11 @@ const express = require("express");
 const User = require("../models/user.model");
 const router = express.Router();
 const jwt = require("jsonwebtoken");
+require("dotenv").config();
 const {body, validationResult} = require("express-validator");
 
 const newToken=(user)=>{
-    return jwt.sign({user}, process.env.MY_KEY)
+    return jwt.sign({user}, `${process.env.MY_KEY}`)
 }
 
 router.get("", async(req, res)=>{
