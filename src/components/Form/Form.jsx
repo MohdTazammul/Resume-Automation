@@ -23,7 +23,7 @@ import Link from '@mui/material/Link';
 import GitHubIcon from '@mui/icons-material/GitHub';
 import LanguageIcon from '@mui/icons-material/Language';
 
-import "./Form.css";
+import "../form/Form.css";
 
 var isGithubUrl = require('is-github-url');
 
