@@ -13,7 +13,7 @@ export default function AddRoute(){
                 <Route path="/signin" element={<SignIn/>}/>
                 <Route path="/signup" element={<SignUp/>}/>
                 <Route path="/downloadresume" element={<DownloadResume/>}/>
-                <Route path="/form" element={<Form/>}/>
+                <Route path="/createform" element={<Form/>}/>
             </Routes>
         </>
     )
