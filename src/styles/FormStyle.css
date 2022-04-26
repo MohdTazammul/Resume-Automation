@@ -277,4 +277,17 @@ text-align: justify;
 {
   width: 50%;
   margin: 20px 0px !important;
+<<<<<<< Updated upstream:src/styles/FormStyle.css
+=======
+  margin: auto;
+}
+.submit-btn-cont
+{
+  display: flex;
+  justify-content: center;
+}
+.accomplishment-cont
+{
+    
+>>>>>>> Stashed changes:src/components/form/Form.css
 }

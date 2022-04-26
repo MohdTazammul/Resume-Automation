@@ -35,7 +35,8 @@ const collegeTitleMaxLength = 50;
 
 const projectTitleMaxLength = 25;
 const projectIntroMaxLength = 100;
-const projectRoleMaxLength = 100;
+const projectRolesMaxLength = 150;
+const projectFeaturesMaxLength = 150;
 
 
 
@@ -44,7 +45,8 @@ const collegeTitleLabel = "College/Institue/School name (maximum " + collegeTitl
 
 const projectTitleLabel = "Project Title  (maximum " + projectTitleMaxLength + " characters) *"
 const projectIntroLabel = "Write a quick breif about project (maximum " + projectIntroMaxLength + " characters) *"
-const projectRoleLabel = "Project Roles, each separated by '.' (maximum " + projectRoleMaxLength + " characters) *"
+const projectRolesLabel = "Project Roles, each in new line (maximum " + projectRolesMaxLength + " characters) *"
+const projectFeaturesLabel = "Project Features, each in new line (maximum " + projectFeaturesMaxLength + " characters) *"
 
 
 const techStacks = ["HTML", "CSS", "JS", "React", "Express", "NodeJS", "MongoDB", "MUI", "ChakraUI"]
@@ -164,7 +166,8 @@ const Form = () => {
 
   const [projectTitle, setProjectTitle] = useState('');
   const [projectIntro, setProjectIntro] = useState('');
-  const [projectRole, setProjectRole] = useState('');
+  const [projectRoles, setProjectRoles] = useState('');
+  const [projectFeatures, setProjectFeatures] = useState('');
   const [projectGithubLink, setProjectGithubLink] = useState('');
   const [projectLiveLink, setProjectLiveLink] = useState('');
   const [projectTechStacks, setProjectTechStacks] = useState('');
@@ -202,9 +205,17 @@ const Form = () => {
       alert("Project live link should be a valid url");
       return;
     }
-    if(projectRole.length == 0)
+    if(projectRoles.length == 0)
     {
       alert("Project roles section can't be blank")
+      return;
+    }
+    let prRoles = projectRoles.split("\n");
+    // console.log(prRoles)    
+
+    if(prRoles.length == 0)
+    {
+      alert("Project features section can't be blank")
       return;
     }
     if(techStacks.length < 2)
@@ -212,12 +223,14 @@ const Form = () => {
       alert("Select atleast one techstacks of project");
       return;
     }
-    let roles = projectRole.split(".");
+    let features = projectFeatures.split(".");
+    let roles = projectRoles.split(".");
     let temp = {
       "title": projectTitle,
       "introduction": projectIntro,
       "githubLink": projectGithubLink,
       "liveLink": projectLiveLink,
+      "features": features,
       "roles": roles,
       "collaboration":projectCollaborated,
       "techStacks":projectTechStacks
@@ -510,10 +523,23 @@ const Form = () => {
               />
               <TextField
                 size="small"
-                value={projectRole} onInput={e => setProjectRole(e.target.value)}
-                inputProps={{ maxLength: projectRoleMaxLength }}
+                value={projectFeatures} onInput={e => setProjectFeatures(e.target.value)}
+                inputProps={{ maxLength: projectFeaturesMaxLength }}
                 margin="dense"
-                label={projectRoleLabel}
+                multiline
+                rows={3}
+                label={projectFeaturesLabel}
+                id="standard-basic" type="url" variant="outlined"
+                fullWidth
+              />
+              <TextField
+                size="small"
+                value={projectRoles} onInput={e => setProjectRoles(e.target.value)}
+                multiline
+                rows={3}
+                inputProps={{ maxLength: projectRolesMaxLength }}
+                margin="dense"
+                label={projectRolesLabel}
                 id="standard-basic" type="url" variant="outlined"
                 fullWidth
               />
@@ -563,6 +589,7 @@ const Form = () => {
          <div className='display-project-section'>
          <p className='title'>{el.title}</p>
          <p className='intro'>{el.introduction}</p>
+         <p className='features'><b>Features : </b>{el.features.join(". ")}</p>
          <p className='roles'><b>Roles : </b>{el.roles.join(". ")}</p>
          <p className='collaboration'><b>Collaboration : </b>{el.collaboration ? "Yes" : "No"}</p>
          <p className='techStacks'><b>Techstacks : </b>{el.techStacks.join(", ")}</p>
