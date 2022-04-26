@@ -44,7 +44,7 @@ const projectFeaturesLabel = "Project Features, each in new line (maximum " + pr
 
 
 const techStacks = ["HTML", "CSS", "JS", "React", "Express", "NodeJS", "MongoDB", "MUI", "ChakraUI"]
-const softSkills = ["Time management","Communication",  "Adaptability",  "Problem-solving",  "Teamwork",  "Creativity",  "Leadership",  "Interpersonal skills"]
+const softSkills = ["Time management", "Communication", "Adaptability", "Problem-solving", "Teamwork", "Creativity", "Leadership", "Interpersonal skills"]
 
 
 const Form = () => {
@@ -307,54 +307,50 @@ const Form = () => {
       alert("Add atleast one Project")
       return
     }
-    if(studentTechStacks.length == 0)
-    {
+    if (studentTechStacks.length == 0) {
       alert("Add atleast one tech stack in your resume");
       return;
     }
-    if(studentSoftSkills.length == 0)
-    {
+    if (studentSoftSkills.length == 0) {
       alert("Add atleast one soft skill in your resume");
       return;
     }
 
     let accomplishmentsTemp = studentAccomplishment.split("\n");
-    if(accomplishmentsTemp.length > 3)
-    {
+    if (accomplishmentsTemp.length > 3) {
       alert("Maximum you can add 3 accomplishments in your resume");
       return;
     }
     let interestsTemp = studentInterests.split(",");
-    if(interestsTemp.length > 5)
-    {
+    if (interestsTemp.length > 5) {
       alert("Maximum you can add 5 accomplishments in your resume");
       return;
     }
-    
+
 
     // FORM is completely validated and good to go to the backend
 
     let educationArray = []
-    educationData.forEach(el=>{
+    educationData.forEach(el => {
       educationArray.push({
-        "course":el.course,
+        "course": el.course,
         "institute": el.college,
-        "start":el.startDate,
-        "end":el.endDate
+        "start": el.startDate,
+        "end": el.endDate
       })
     })
 
     // console.log(educationArray);
 
     let projectArray = [];
-    projectData.forEach(el =>{
+    projectData.forEach(el => {
       projectArray.push({
         "name": el.title,
         "description": el.introduction,
         "gitLink": el.githubLink,
         "liveLink": el.liveLink,
         "features": el.features,
-        "techStack":el.techStacks,
+        "techStack": el.techStacks,
         "areasOfResp": el.roles,
         "solo": !el.collaboration,
         "team": 4 // Needs clarification on it
@@ -364,11 +360,11 @@ const Form = () => {
     // console.log(projectArray);
 
     var sendingPacket = {
-      "user":"",
+      "user": "",
       "personal": {
         "profilePic": selectedFile.name,
         "name": studentName,
-        "tagLine":tagline,
+        "tagLine": tagline,
         "email": emailID,
         "mob": contact,
         "linkedin": linkedinLink,
@@ -376,12 +372,12 @@ const Form = () => {
         "github": githubLink
       },
       "summary": about,
-      "projects":projectArray,
-      "education":educationArray,
+      "projects": projectArray,
+      "education": educationArray,
       "techSkills": studentTechStacks,
       "softSkills": studentSoftSkills,
       "accomplishments": accomplishmentsTemp,
-      "interests" : interestsTemp
+      "interests": interestsTemp
     }
 
     console.log(sendingPacket);
@@ -455,7 +451,7 @@ const Form = () => {
             >Add Education</DialogTitle>
             <DialogContent>
               <TextField
-                value={courseTitle} onInput={e => { setCourseTitle(e.target.value); setCourseTitleError(false)}}
+                value={courseTitle} onInput={e => { setCourseTitle(e.target.value); setCourseTitleError(false) }}
                 helperText={""}
                 error={courseTitleError}
                 inputProps={{ maxLength: courseTitleMaxLength }}
@@ -680,82 +676,82 @@ const Form = () => {
         </div>
         <div className='accomplishment-cont'>
 
-        <Autocomplete
-                onChange={(option) => {
-                  if (option.target.innerText) {
-                    setStudentTechStacks([...studentTechStacks, option.target.innerText])
-                    // tagsArr.push(option.target.innerText);
-                    // if (projectTechStacks.length === 5) {
-                    //   console.log(projectTechStacks.length);
-                    //   setMaxTechStacksRendering(true);
-                    // }
-                    // console.log(projectTechStacks);
-                  }
+          <Autocomplete
+            onChange={(option) => {
+              if (option.target.innerText) {
+                setStudentTechStacks([...studentTechStacks, option.target.innerText])
+                // tagsArr.push(option.target.innerText);
+                // if (projectTechStacks.length === 5) {
+                //   console.log(projectTechStacks.length);
+                //   setMaxTechStacksRendering(true);
+                // }
+                // console.log(projectTechStacks);
+              }
 
-                }}
-                // readOnly={maxTechStacksRendering ? true : false}
-                size="small"
-                style={{ marginTop: "8px" }}
-                multiple
-                id="tags-outlined"
-                options={techStacks}
-                getOptionLabel={(option) => option}
-                filterSelectedOptions
-                renderInput={(params) => (
-                  <TextField
-                    {...params}
-                    label="Tech Stacks *"
-                  />
-                )}
-              />
-            
-            <Autocomplete
-                onChange={(option) => {
-                  if (option.target.innerText) {
-                    setStudentSoftSkills([...studentSoftSkills, option.target.innerText])
-                  }
-
-                }}
-                size="small"
-                style={{ marginTop: "16px" }}
-                multiple
-                id="tags-outlined"
-                options={softSkills}
-                getOptionLabel={(option) => option}
-                filterSelectedOptions
-                renderInput={(params) => (
-                  <TextField
-                    {...params}
-                    label="Soft Skills *"
-                  />
-                )}
-              />
-
-<TextField
-                size="small"
-                style={{ marginTop: "16px" }}
-                value={studentAccomplishment} onInput={e => setStudentAccomplishment(e.target.value)}
-                inputProps={{ maxLength: 150 }}
-                margin="dense"
-                multiline
-                rows={3}
-                label={"Accomplisments, each in new line (maximum 150 characters)"}
-                id="standard-basic" type="url" variant="outlined"
-                fullWidth
-              />
-
+            }}
+            // readOnly={maxTechStacksRendering ? true : false}
+            size="small"
+            style={{ marginTop: "8px" }}
+            multiple
+            id="tags-outlined"
+            options={techStacks}
+            getOptionLabel={(option) => option}
+            filterSelectedOptions
+            renderInput={(params) => (
               <TextField
-                size="small"
-                style={{ marginTop: "10px" }}
-                value={studentInterests} onInput={e => setStudentInterests(e.target.value)}
-                inputProps={{ maxLength: 100 }}
-                margin="dense"
-                multiline
-                rows={2}
-                label={"Interests, each separated by (,) (maximum 100 characters)"}
-                id="standard-basic" type="url" variant="outlined"
-                fullWidth
+                {...params}
+                label="Tech Stacks *"
               />
+            )}
+          />
+
+          <Autocomplete
+            onChange={(option) => {
+              if (option.target.innerText) {
+                setStudentSoftSkills([...studentSoftSkills, option.target.innerText])
+              }
+
+            }}
+            size="small"
+            style={{ marginTop: "16px" }}
+            multiple
+            id="tags-outlined"
+            options={softSkills}
+            getOptionLabel={(option) => option}
+            filterSelectedOptions
+            renderInput={(params) => (
+              <TextField
+                {...params}
+                label="Soft Skills *"
+              />
+            )}
+          />
+
+          <TextField
+            size="small"
+            style={{ marginTop: "16px" }}
+            value={studentAccomplishment} onInput={e => setStudentAccomplishment(e.target.value)}
+            inputProps={{ maxLength: 150 }}
+            margin="dense"
+            multiline
+            rows={3}
+            label={"Accomplisments, each in new line (maximum 150 characters)"}
+            id="standard-basic" type="url" variant="outlined"
+            fullWidth
+          />
+
+          <TextField
+            size="small"
+            style={{ marginTop: "10px" }}
+            value={studentInterests} onInput={e => setStudentInterests(e.target.value)}
+            inputProps={{ maxLength: 100 }}
+            margin="dense"
+            multiline
+            rows={2}
+            label={"Interests, each separated by (,) (maximum 100 characters)"}
+            id="standard-basic" type="url" variant="outlined"
+            fullWidth
+          />
 
         </div>
       </div>
