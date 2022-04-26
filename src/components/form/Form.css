@@ -14,10 +14,10 @@
     justify-content: space-between;
     box-sizing: border-box;
 }
-.header-section > div{
-    /* border: 1px solid blue; */
-    /* height: 200px; */
-}
+/* .header-section > div{
+    border: 1px solid blue; 
+     height: 200px;
+} */
 
 .proflile-img {
     position: relative;
