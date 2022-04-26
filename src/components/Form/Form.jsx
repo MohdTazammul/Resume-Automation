@@ -307,7 +307,6 @@ const Form = () => {
       alert("Add atleast one Project")
       return
     }
-
     if(studentTechStacks.length == 0)
     {
       alert("Add atleast one tech stack in your resume");
@@ -331,8 +330,63 @@ const Form = () => {
       alert("Maximum you can add 5 accomplishments in your resume");
       return;
     }
+    
 
-    alert("Form validated")
+    // FORM is completely validated and good to go to the backend
+
+    let educationArray = []
+    educationData.forEach(el=>{
+      educationArray.push({
+        "course":el.course,
+        "institute": el.college,
+        "start":el.startDate,
+        "end":el.endDate
+      })
+    })
+
+    // console.log(educationArray);
+
+    let projectArray = [];
+    projectData.forEach(el =>{
+      projectArray.push({
+        "name": el.title,
+        "description": el.introduction,
+        "gitLink": el.githubLink,
+        "liveLink": el.liveLink,
+        "features": el.features,
+        "techStack":el.techStacks,
+        "areasOfResp": el.roles,
+        "solo": !el.collaboration,
+        "team": 4 // Needs clarification on it
+      })
+    })
+
+    // console.log(projectArray);
+
+    var sendingPacket = {
+      "user":"",
+      "personal": {
+        "profilePic": selectedFile.name,
+        "name": studentName,
+        "tagLine":tagline,
+        "email": emailID,
+        "mob": contact,
+        "linkedin": linkedinLink,
+        "address": address,
+        "github": githubLink
+      },
+      "summary": about,
+      "projects":projectArray,
+      "education":educationArray,
+      "techSkills": studentTechStacks,
+      "softSkills": studentSoftSkills,
+      "accomplishments": accomplishmentsTemp,
+      "interests" : interestsTemp
+    }
+
+    console.log(sendingPacket);
+    alert("Data sent, check console once")
+
   }
 
 
