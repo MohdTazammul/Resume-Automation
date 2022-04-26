@@ -124,6 +124,7 @@ const Form = () => {
   const addEducation = () => {
     if (courseTitle.length == 0) {
       alert("Course/Degree title can't be blank");
+      setCourseTitleError(true)
       return;
     }
     if (collegeName.length == 0) {
@@ -400,7 +401,9 @@ const Form = () => {
             >Add Education</DialogTitle>
             <DialogContent>
               <TextField
-                value={courseTitle} onInput={e => setCourseTitle(e.target.value)}
+                value={courseTitle} onInput={e => { setCourseTitle(e.target.value); setCourseTitleError(false)}}
+                helperText={""}
+                error={courseTitleError}
                 inputProps={{ maxLength: courseTitleMaxLength }}
                 autoFocus
                 margin="dense"
@@ -555,13 +558,13 @@ const Form = () => {
               <Autocomplete
                 onChange={(option) => {
                   if (option.target.innerText) {
-                    setStudentTechStacks([...projectTechStacks, option.target.innerText])
+                    setProjectTechStacks([...projectTechStacks, option.target.innerText])
                     // tagsArr.push(option.target.innerText);
-                    if (studentTechStacks.length === 5) {
-                      console.log(studentTechStacks.length);
-                      setMaxTechStacksRendering(true);
-                    }
-                    console.log(projectTechStacks);
+                    // if (studentTechStacks.length === 5) {
+                    //   console.log(studentTechStacks.length);
+                    //   setMaxTechStacksRendering(true);
+                    // }
+                    // console.log(projectTechStacks);
                   }
 
                 }}
@@ -626,7 +629,7 @@ const Form = () => {
         <Autocomplete
                 onChange={(option) => {
                   if (option.target.innerText) {
-                    setProjectTechStacks([...projectTechStacks, option.target.innerText])
+                    setStudentTechStacks([...studentTechStacks, option.target.innerText])
                     // tagsArr.push(option.target.innerText);
                     // if (projectTechStacks.length === 5) {
                     //   console.log(projectTechStacks.length);
@@ -647,7 +650,7 @@ const Form = () => {
                 renderInput={(params) => (
                   <TextField
                     {...params}
-                    label="Tech Stacks"
+                    label="Tech Stacks *"
                   />
                 )}
               />
@@ -669,7 +672,7 @@ const Form = () => {
                 renderInput={(params) => (
                   <TextField
                     {...params}
-                    label="Soft Skills"
+                    label="Soft Skills *"
                   />
                 )}
               />
