@@ -5,11 +5,17 @@ import Autocomplete from '@mui/material/Autocomplete';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
+import Checkbox from '@mui/material/Checkbox';
 import FormGroup from '@mui/material/FormGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Fab from '@mui/material/Fab';
+import AddIcon from '@mui/icons-material/Add';
 import EditIcon from '@mui/icons-material/Edit';
+import FavoriteIcon from '@mui/icons-material/Favorite';
+import NavigationIcon from '@mui/icons-material/Navigation';
+import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import Switch from '@mui/material/Switch';
@@ -17,7 +23,7 @@ import Link from '@mui/material/Link';
 import GitHubIcon from '@mui/icons-material/GitHub';
 import LanguageIcon from '@mui/icons-material/Language';
 
-import "./Form.css";
+import "../styles/FormStyle.css";
 
 var isGithubUrl = require('is-github-url');
 
@@ -44,14 +50,13 @@ const projectFeaturesLabel = "Project Features, each in new line (maximum " + pr
 
 
 const techStacks = ["HTML", "CSS", "JS", "React", "Express", "NodeJS", "MongoDB", "MUI", "ChakraUI"]
-const softSkills = ["Time management","Communication",  "Adaptability",  "Problem-solving",  "Teamwork",  "Creativity",  "Leadership",  "Interpersonal skills"]
 
 
 const Form = () => {
 
 
-  const [maxTechStacksRendering, setMaxTechStacksRendering] = useState(false); // maxTechStacksRendering for conditional
-
+  const [state, setState] = useState(false); // State for conditional
+   
 
   const [selectedFile, setSelectedFile] = useState()
   const [preview, setPreview] = useState()
@@ -80,15 +85,15 @@ const Form = () => {
   }
 
 
-  const [studentName, setStudentName] = useState('');
-  const [tagline, setTagline] = useState('');
-  const [address, setAddress] = useState('');
-  const [emailID, setEmailID] = useState('');
-  const [contact, setContact] = useState('');
-  const [portfolioLink, setPortfolioLink] = useState('');
-  const [githubLink, setGithubLink] = useState('');
-  const [linkedinLink, setLinkedinLink] = useState('');
-  const [about, setAbout] = useState('');
+  const [studentName , setStudentName] = useState('');
+  const [tagline , setTagline] = useState('');
+  const [address , setAddress] = useState('');
+  const [emailID , setEmailID] = useState('');
+  const [contact , setContact] = useState('');
+  const [portfolioLink , setPortfolioLink] = useState('');
+  const [githubLink , setGithubLink] = useState('');
+  const [linkedinLink , setLinkedinLink] = useState('');
+  const [about , setAbout] = useState('');
 
   const [courseTitle, setCourseTitle] = useState('');
   const [collegeName, setCollegeName] = useState('');
@@ -105,12 +110,13 @@ const Form = () => {
 
   const [openEducationForm, setOpenEducationForm] = React.useState(false);
 
-
+  
   const [displayProjectData, setDisplayProjectData] = useState(false);
 
 
   const handleOpenEducationForm = () => {
-    if (educationData.length == 3) {
+    if(educationData.length == 3)
+    {
       alert("You already have added three educations, can't add more")
       return;
     }
@@ -124,7 +130,6 @@ const Form = () => {
   const addEducation = () => {
     if (courseTitle.length == 0) {
       alert("Course/Degree title can't be blank");
-      setCourseTitleError(true)
       return;
     }
     if (collegeName.length == 0) {
@@ -153,7 +158,7 @@ const Form = () => {
     setEducationData([...educationData, temp]);
     setDisplayEducationData(true);
 
-
+    
 
   }
 
@@ -171,7 +176,8 @@ const Form = () => {
   const [projectData, setProjectData] = useState([]);
 
   const handleOpenProjectForm = () => {
-    if (projectData.length == 2) {
+    if(projectData.length == 2)
+    {
       alert("You have already added two projects, can't add more")
       return;
     }
@@ -199,37 +205,35 @@ const Form = () => {
       alert("Project live link should be a valid url");
       return;
     }
-    if (projectFeatures.length == 0) {
-      alert("Project features section can't be blank")
-      return;
-    }
-    let prFeatures = projectFeatures.split("\n");
-    if (prFeatures.length > 3) {
-      alert("Maximum you can add 3 points in features of Project");
-      return;
-    }
-    if (projectRoles.length == 0) {
+    if(projectRoles.length == 0)
+    {
       alert("Project roles section can't be blank")
       return;
     }
     let prRoles = projectRoles.split("\n");
-    if (prRoles.length > 3) {
-      alert("Maximum you can add 3 points in roles of Project");
+    // console.log(prRoles)    
+
+    if(prRoles.length == 0)
+    {
+      alert("Project features section can't be blank")
       return;
     }
-    if (projectTechStacks.length < 1) {
-      alert("Select atleast one techstack");
+    if(techStacks.length < 2)
+    {
+      alert("Select atleast one techstacks of project");
       return;
     }
+    let features = projectFeatures.split(".");
+    let roles = projectRoles.split(".");
     let temp = {
       "title": projectTitle,
       "introduction": projectIntro,
       "githubLink": projectGithubLink,
       "liveLink": projectLiveLink,
-      "features": prFeatures,
-      "roles": prRoles,
-      "collaboration": projectCollaborated,
-      "techStacks": projectTechStacks
+      "features": features,
+      "roles": roles,
+      "collaboration":projectCollaborated,
+      "techStacks":projectTechStacks
     }
     setProjectData([...projectData, temp]);
     setDisplayProjectData(true);
@@ -237,156 +241,146 @@ const Form = () => {
     setOpenProjectForm(false)
   }
 
-
+  
 
   function validateUrl(value) {
     return /^(?:(?:(?:https?|ftp):)?\/\/)(?:\S+(?::\S*)?@)?(?:(?!(?:10|127)(?:\.\d{1,3}){3})(?!(?:169\.254|192\.168)(?:\.\d{1,3}){2})(?!172\.(?:1[6-9]|2\d|3[0-1])(?:\.\d{1,3}){2})(?:[1-9]\d?|1\d\d|2[01]\d|22[0-3])(?:\.(?:1?\d{1,2}|2[0-4]\d|25[0-5])){2}(?:\.(?:[1-9]\d?|1\d\d|2[0-4]\d|25[0-4]))|(?:(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)(?:\.(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)*(?:\.(?:[a-z\u00a1-\uffff]{2,})))(?::\d{2,5})?(?:[/?#]\S*)?$/i.test(value);
   }
 
-  function editFormButtonPress(e) {
+  function editFormButtonPress(e)
+  {
     console.log(e.target.value)
   }
 
-  function submitForm() {
-    if (!selectedFile) {
+  function submitForm()
+  {
+    if(!selectedFile)
+    {
       alert("Please upload the profile image");
       return
     }
-    var imgSize = Math.round(selectedFile.size / 1024); // In MB
-    if (imgSize > profileMaxSize) {
-      alert("File is too big, please select a file of size less than " + Math.round(profileMaxSize / 1024) + " MB");
+    var imgSize = Math.round(selectedFile.size/1024); // In MB
+    if(imgSize > profileMaxSize)
+    {
+      alert("File is too big, please select a file of size less than "+Math.round(profileMaxSize/1024)+" MB");
       return
     }
-    if (imgSize < profileMinSize) {
-      alert("File is too small, please select a file of size greater than " + profileMinSize + " KB");
+    if(imgSize < profileMinSize)
+    {
+      alert("File is too small, please select a file of size greater than "+profileMinSize+" KB");
       return
     }
-    if (studentName == "") {
+    if(studentName == "")
+    {
       alert("Name field can't be blank")
       return
     }
-    if (tagline == "") {
+    if(tagline == "")
+    {
       alert("tagline can't be blank")
       return
     }
     var phoneno = /^\d{10}$/;
-    if (!contact.match(phoneno)) {
+    if(!contact.match(phoneno))
+    {
       alert("Enter a valid contact number")
       return
     }
-    if (!(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(emailID))) {
+    if (!(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(emailID)))
+    {
       alert("Enter a valid Email ID")
       return
     }
-    if (address == "") {
+    if(address == "")
+    {
       alert("Address can't be blank")
       return
     }
-    if (!validateUrl(portfolioLink)) {
+    if(!validateUrl(portfolioLink))
+    {
       alert("Enter a valid portfolio link")
       return
     }
-    if (!validateUrl(linkedinLink)) {
+    if(!validateUrl(linkedinLink))
+    {
       alert("Enter a valid linkedin profile link")
       return
     }
-    if (!isGithubUrl(githubLink)) {
+    if(!isGithubUrl(githubLink))
+    {
       alert("Enter a valid github profile link")
       return
     }
-
-    if (about.length < 100) {
+    
+    if(about.length < 100)
+    {
       alert("write atleast 100 characters in about section")
       return
     }
-    if (educationData.length == 0) {
+    if(educationData.length == 0)
+    {
       alert("Add atleast one Education")
       return
     }
-    if (projectData.length == 0) {
+    if(projectData.length == 0)
+    {
       alert("Add atleast one Project")
       return
     }
-
-    if(studentTechStacks.length == 0)
-    {
-      alert("Add atleast one tech stack in your resume");
-      return;
-    }
-    if(studentSoftSkills.length == 0)
-    {
-      alert("Add atleast one soft skill in your resume");
-      return;
-    }
-
-    let accomplishmentsTemp = studentAccomplishment.split("\n");
-    if(accomplishmentsTemp.length > 3)
-    {
-      alert("Maximum you can add 3 accomplishments in your resume");
-      return;
-    }
-    let interestsTemp = studentInterests.split(",");
-    if(interestsTemp.length > 5)
-    {
-      alert("Maximum you can add 5 accomplishments in your resume");
-      return;
-    }
-
     alert("Form validated")
+    
+    
+
   }
-
-
-  const [studentTechStacks, setStudentTechStacks] = useState([]);
-  const [studentSoftSkills, setStudentSoftSkills] = useState([]);
-  const [studentAccomplishment, setStudentAccomplishment] = useState([]);
-  const [studentInterests, setStudentInterests] = useState("");
 
   return (
     <div className='form-container'>
       <div className='header-section'>
-        <div className='proflile-img'>
-          <img src={preview} />
-          <div className="middle">
-            <input type="file" onChange={onSelectFile} accept="image/png, image/jpeg" className="custom-file-input" />
+        <div>
+          <div className='proflile-img'>
+            <img src={preview} />
+            <div className="middle">
+              <input type="file" onChange={onSelectFile} accept="image/png, image/jpeg" className="custom-file-input" />
+            </div>
           </div>
         </div>
         <div className='basic-input'>
           <div className='name-and-tagline'>
-            <input value={studentName} onInput={e => setStudentName(e.target.value)} type={"text"} placeholder={"Enter your full name *"} />
-            <input value={tagline} onInput={e => setTagline(e.target.value)} type={"text"} placeholder={"Enter your profile tagline *"} />
+            <input value={studentName} onInput={e => setStudentName(e.target.value)}  type={"text"} placeholder={"Enter your full name *"} />
+            <input  value={tagline} onInput={e => setTagline(e.target.value)}  type={"text"} placeholder={"Enter your profile tagline *"} />
           </div>
           <hr />
           <div className='social-media-links'>
             <table>
               <tr>
                 <td>
-                  <input value={contact} onInput={e => setContact(e.target.value)} id='contact-input' type={"number"} placeholder={"Contact Number *"} />
+                  <input  value={contact} onInput={e => setContact(e.target.value)}  id='contact-input' type={"number"} placeholder={"Contact Number *"} />
                 </td>
                 <td>
-                  <input value={portfolioLink} onInput={e => setPortfolioLink(e.target.value)} id='portfolio-url-input' type={"url"} placeholder={"Portfolio Url *"} />
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <input value={emailID} onInput={e => setEmailID(e.target.value)} id='email-id-input' type={"email"} placeholder={"Email ID *"} />
-                </td>
-                <td>
-                  <input value={linkedinLink} onInput={e => setLinkedinLink(e.target.value)} id='linkedin-url-input' type={"url"} placeholder={"Linkedin Url *"} />
+                  <input  value={portfolioLink} onInput={e => setPortfolioLink(e.target.value)}  id='portfolio-url-input' type={"url"} placeholder={"Portfolio Url *"} />
                 </td>
               </tr>
               <tr>
                 <td>
-                  <input value={address} onInput={e => setAddress(e.target.value)} id='address-input' type={"text"} placeholder={"Address *"} />
+                  <input  value={emailID} onInput={e => setEmailID(e.target.value)}  id='email-id-input' type={"email"} placeholder={"Email ID *"} />
                 </td>
                 <td>
-                  <input value={githubLink} onInput={e => setGithubLink(e.target.value)} id='github-url-input' type={"url"} placeholder={"Github Url *"} />
+                  <input  value={linkedinLink} onInput={e => setLinkedinLink(e.target.value)}  id='linkedin-url-input' type={"url"} placeholder={"Linkedin Url *"} />
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <input  value={address} onInput={e => setAddress(e.target.value)}  id='address-input' type={"text"} placeholder={"Address *"} />
+                </td>
+                <td>
+                  <input  value={githubLink} onInput={e => setGithubLink(e.target.value)}  id='github-url-input' type={"url"} placeholder={"Github Url *"} />
                 </td>
               </tr>
             </table>
           </div>
         </div>
         <div className='input2'>
-          <textarea value={about} onInput={e => setAbout(e.target.value)} placeholder={"Enter your about section (maximum 300 characters) *"} maxLength={"300"} ></textarea>
+          <textarea  value={about} onInput={e => setAbout(e.target.value)}  placeholder={"Enter your about section (maximum 300 characters) *"} maxLength={"300"} ></textarea>
         </div>
       </div>
       <hr />
@@ -401,9 +395,7 @@ const Form = () => {
             >Add Education</DialogTitle>
             <DialogContent>
               <TextField
-                value={courseTitle} onInput={e => { setCourseTitle(e.target.value); setCourseTitleError(false)}}
-                helperText={""}
-                error={courseTitleError}
+                value={courseTitle} onInput={e => setCourseTitle(e.target.value)}
                 inputProps={{ maxLength: courseTitleMaxLength }}
                 autoFocus
                 margin="dense"
@@ -455,28 +447,28 @@ const Form = () => {
           </Dialog>
           {displayEducationData ?
             <div className="display-education-cont">
-              {educationData.map((el, index) => (
-                <div className='display-education-section'>
-                  <p>{el.course}</p>
-                  <p><span>from</span> {el.college}</p>
-                  <p>( {el.startDate} - {el.endDate} )</p>
-                  <div className='edit-delete-buttons'>
-                    <Fab onClick={() => {
-                      openEducationForm(true);
-                    }} color="primary" size='small' aria-label="edit">
-                      <EditIcon />
-                    </Fab>
-                    &nbsp;&nbsp;
-                    <Fab onClick={() => {
-                      var temp = [...educationData];
-                      temp.splice(index, 1);
-                      setEducationData(temp);
-                    }} color="error" size='small' aria-label="delete">
-                      <DeleteIcon />
-                    </Fab>
-                  </div>
-                </div>
-              ))}
+              {educationData.map((el, index) => (  
+         <div className='display-education-section'>
+         <p>{el.course}</p>
+         <p><span>from</span> {el.college}</p>
+         <p>( {el.startDate} - {el.endDate} )</p>
+         <div className='edit-delete-buttons'>
+         <Fab onClick={()=>{
+           openEducationForm(true);
+         }} color="primary" size='small' aria-label="edit">
+           <EditIcon />
+         </Fab>
+         &nbsp;&nbsp;
+         <Fab onClick={() =>{
+            var temp = [...educationData];
+            temp.splice(index, 1);
+            setEducationData(temp);
+         }}  color="error" size='small' aria-label="delete">
+           <DeleteIcon />
+         </Fab>
+       </div>
+       </div>
+        ))}   
             </div>
             : ""}
         </div>
@@ -551,24 +543,26 @@ const Form = () => {
                 id="standard-basic" type="url" variant="outlined"
                 fullWidth
               />
-              <FormGroup>
-                <FormControlLabel control={<Switch onChange={(e) => { setProjectCollaborated(e.target.checked) }} />} label="Was it a Collaborative project?" />
+
+              
+<FormGroup>
+<FormControlLabel control={<Switch onChange={(e)=>{setProjectCollaborated(e.target.checked)}} />} label="Was it a Collaborative project?" />
               </FormGroup>
 
               <Autocomplete
-                onChange={(option) => {
-                  if (option.target.innerText) {
-                    setProjectTechStacks([...projectTechStacks, option.target.innerText])
-                    // tagsArr.push(option.target.innerText);
-                    // if (studentTechStacks.length === 5) {
-                    //   console.log(studentTechStacks.length);
-                    //   setMaxTechStacksRendering(true);
-                    // }
-                    // console.log(projectTechStacks);
+              onChange={(option) => {
+                if (option.target.innerText) {
+                  setProjectTechStacks([...projectTechStacks, option.target.innerText])
+                  // tagsArr.push(option.target.innerText);
+                  if (projectTechStacks.length === 5) {
+                    console.log(projectTechStacks.length);
+                    setState(true);
                   }
-
-                }}
-                readOnly={maxTechStacksRendering ? true : false}
+                  console.log(projectTechStacks);
+                }
+                
+              }}
+              readOnly={state ? true : false}
                 size="small"
                 style={{ marginTop: "8px" }}
                 multiple
@@ -591,125 +585,46 @@ const Form = () => {
           </Dialog>
           {displayProjectData ?
             <div className="display-project-cont">
-              {projectData.map((el, index) => (
-                <div className='display-project-section'>
-                  <p className='title'>{el.title}</p>
-                  <p className='intro'>{el.introduction}</p>
-                  <p className='features'><b>Features : </b>{el.features.join(". ")}</p>
-                  <p className='roles'><b>Roles : </b>{el.roles.join(". ")}</p>
-                  <p className='collaboration'><b>Collaboration : </b>{el.collaboration ? "Yes" : "No"}</p>
-                  <p className='techStacks'><b>Techstacks : </b>{el.techStacks.join(", ")}</p>
-                  <Link className='git-link' href={el.githubLink} target="_blank" >
-                    <GitHubIcon />
-                  </Link>  &nbsp;&nbsp; <Link className='live-link' href={el.liveLink} target="_blank" >
-                    <LanguageIcon />
-                  </Link>
-                  <div className='edit-delete-buttons'>
-                    <Fab onClick={() => {
-                      openProjectForm(true);
-                    }} color="primary" size='small' aria-label="edit">
-                      <EditIcon />
-                    </Fab>
-                    &nbsp;&nbsp;
-                    <Fab onClick={() => {
-                      var temp = [...projectData];
-                      temp.splice(index, 1);
-                      setProjectData(temp);
-                    }} color="error" size='small' aria-label="delete">
-                      <DeleteIcon />
-                    </Fab>
-                  </div>
-                </div>
-              ))}
+              {projectData.map((el, index) => (  
+         <div className='display-project-section'>
+         <p className='title'>{el.title}</p>
+         <p className='intro'>{el.introduction}</p>
+         <p className='features'><b>Features : </b>{el.features.join(". ")}</p>
+         <p className='roles'><b>Roles : </b>{el.roles.join(". ")}</p>
+         <p className='collaboration'><b>Collaboration : </b>{el.collaboration ? "Yes" : "No"}</p>
+         <p className='techStacks'><b>Techstacks : </b>{el.techStacks.join(", ")}</p>
+         <Link className='git-link'  href={el.githubLink} target="_blank" >
+    <GitHubIcon  />
+</Link>  &nbsp;&nbsp; <Link className='live-link'  href={el.liveLink} target="_blank" >
+    <LanguageIcon  />
+</Link>
+         <div className='edit-delete-buttons'>
+         <Fab onClick={()=>{
+           openProjectForm(true);
+         }} color="primary" size='small' aria-label="edit">
+           <EditIcon />
+         </Fab>
+         &nbsp;&nbsp;
+         <Fab onClick={() =>{
+            var temp = [...projectData];
+            temp.splice(index, 1);
+            setProjectData(temp);
+         }}  color="error" size='small' aria-label="delete">
+           <DeleteIcon />
+         </Fab>
+       </div>
+       </div>
+        ))}   
             </div>
             : ""}
         </div>
-        <div className='accomplishment-cont'>
-
-        <Autocomplete
-                onChange={(option) => {
-                  if (option.target.innerText) {
-                    setStudentTechStacks([...studentTechStacks, option.target.innerText])
-                    // tagsArr.push(option.target.innerText);
-                    // if (projectTechStacks.length === 5) {
-                    //   console.log(projectTechStacks.length);
-                    //   setMaxTechStacksRendering(true);
-                    // }
-                    // console.log(projectTechStacks);
-                  }
-
-                }}
-                // readOnly={maxTechStacksRendering ? true : false}
-                size="small"
-                style={{ marginTop: "8px" }}
-                multiple
-                id="tags-outlined"
-                options={techStacks}
-                getOptionLabel={(option) => option}
-                filterSelectedOptions
-                renderInput={(params) => (
-                  <TextField
-                    {...params}
-                    label="Tech Stacks *"
-                  />
-                )}
-              />
-            
-            <Autocomplete
-                onChange={(option) => {
-                  if (option.target.innerText) {
-                    setStudentSoftSkills([...studentSoftSkills, option.target.innerText])
-                  }
-
-                }}
-                size="small"
-                style={{ marginTop: "16px" }}
-                multiple
-                id="tags-outlined"
-                options={softSkills}
-                getOptionLabel={(option) => option}
-                filterSelectedOptions
-                renderInput={(params) => (
-                  <TextField
-                    {...params}
-                    label="Soft Skills *"
-                  />
-                )}
-              />
-
-<TextField
-                size="small"
-                style={{ marginTop: "16px" }}
-                value={studentAccomplishment} onInput={e => setStudentAccomplishment(e.target.value)}
-                inputProps={{ maxLength: 150 }}
-                margin="dense"
-                multiline
-                rows={3}
-                label={"Accomplisments, each in new line (maximum 150 characters)"}
-                id="standard-basic" type="url" variant="outlined"
-                fullWidth
-              />
-
-              <TextField
-                size="small"
-                style={{ marginTop: "10px" }}
-                value={studentInterests} onInput={e => setStudentInterests(e.target.value)}
-                inputProps={{ maxLength: 100 }}
-                margin="dense"
-                multiline
-                rows={2}
-                label={"Interests, each separated by (,) (maximum 100 characters)"}
-                id="standard-basic" type="url" variant="outlined"
-                fullWidth
-              />
+        <div>
 
         </div>
       </div>
-      <div className='submit-btn-cont'>
-        <Button onClick={submitForm} className='genrate-resume-btn' color="success" variant="contained" endIcon={<ChevronRightIcon />}>
-          Genrate Resume
-        </Button>
-      </div>
+      <Button onClick={submitForm} className='genrate-resume-btn' color="success" variant="contained" endIcon={<ChevronRightIcon />}>
+        Genrate Resume
+      </Button>
     </div>
   )
 }

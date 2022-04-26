@@ -2,6 +2,7 @@
     /* border: 1px solid red; */
     width: 90%;
     height: 400px;
+    margin: auto;
     margin-top: 80px;
     margin-bottom: 80px;
     box-sizing: border-box;
@@ -14,10 +15,10 @@
     justify-content: space-between;
     box-sizing: border-box;
 }
-/* .header-section > div{
-    border: 1px solid blue; 
-     height: 200px;
-} */
+.header-section > div{
+    /* border: 1px solid blue; */
+    /* height: 200px; */
+}
 
 .proflile-img {
     position: relative;
@@ -276,6 +277,8 @@ text-align: justify;
 {
   width: 50%;
   margin: 20px 0px !important;
+<<<<<<< Updated upstream:src/styles/FormStyle.css
+=======
   margin: auto;
 }
 .submit-btn-cont
@@ -286,4 +289,5 @@ text-align: justify;
 .accomplishment-cont
 {
     
+>>>>>>> Stashed changes:src/components/form/Form.css
 }
