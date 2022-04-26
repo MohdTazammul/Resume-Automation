@@ -2,14 +2,14 @@ const express = require("express");
 const Resume = require("../models/resume.model");
 const router = express.Router();
 
-router.get("/", (req, res)=>{
-    try{
-        res.send("Home")
-    }
-    catch(e){
-        res.send(e.message);
-    }
-});
+// router.get("/", (req, res)=>{
+//     try{
+//         res.send("Home")
+//     }
+//     catch(e){
+//         res.send(e.message);
+//     }
+// });
 
 router.post("", async(req, res)=>{
     try{
@@ -34,7 +34,7 @@ router.get("", async(req, res)=>{
 
 router.get("/:id", async(req, res)=>{
     try{
-        const resume = await Resume.findById(req.params.id).lean().exec();
+        const resume = await Resume.find({user:req.params.id}).lean().exec();
         res.send(resume);
     }
     catch(e){

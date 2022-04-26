@@ -3,16 +3,19 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 
 const Resume = () => {
-  const [details, addDetails] = useState({});
+  const [details, adddetails] = useState([]);
+  const userId = JSON.parse(localStorage.getItem("loggedinUser"));
+  console.log(userId)
   useEffect(() => {
     axios
-      .get("http://localhost:4567/resume/6252c636afaa2f28ae46bc54")
+      .get(`http://localhost:4567/resume/${userId}`)
       .then((res) => {
-        addDetails(res.data);
+        console.log(res.data)
+        adddetails(res.data[res.data.length-1]);
       })
       .catch((e) => console.log(e.message));
   }, []);
-  console.log(details);
+  console.log("details = ",details);
   return (
     <div id="outerDiv">
       <div id="mainDiv">
@@ -38,10 +41,10 @@ const Resume = () => {
                   </p>
                   <div>
                     <p className="c30 title" id="h.x8fm1uorkbaw">
-                      <span className="c40">ABHISHEK KATKAR</span>
+                      <span className="c40">{(details?.personal?.name)?.toUpperCase()}</span>
                     </p>
                     <p className="c7 subtitle" id="h.ymi089liagec">
-                      <span className="c31">Full-Stack Web Developer</span>
+                      <span className="c31">{details?.personal?.tagLine}</span>
                     </p>
                   </div>
                 </div>
@@ -89,7 +92,7 @@ const Resume = () => {
                 </p>
                 <p className="c5">
                   <span className="c1">
-                    {details.summary}
+                    {details?.summary}
                     <br />
                   </span>
                 </p>

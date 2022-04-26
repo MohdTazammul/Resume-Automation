@@ -55,8 +55,9 @@ export default function SignIn() {
         if (res.data.err) {
           alert(res.data.err);
         } else {
-          set(res.data.token);
-          console.log("new token = ", token);
+          // set(res.data.token);
+          console.log(res.data.user[0]._id);
+          localStorage.setItem("loggedinUser",JSON.stringify(res.data.user[0]._id));
           navigate("/createform");
         }
       })
