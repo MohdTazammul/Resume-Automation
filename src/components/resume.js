@@ -5,17 +5,17 @@ import axios from "axios";
 const Resume = () => {
   const [details, adddetails] = useState([]);
   const userId = JSON.parse(localStorage.getItem("loggedinUser"));
-  console.log(userId)
+  console.log(userId);
   useEffect(() => {
     axios
       .get(`http://localhost:4567/resume/${userId}`)
       .then((res) => {
-        console.log(res.data)
-        adddetails(res.data[res.data.length-1]);
+        console.log(res.data);
+        adddetails(res.data[res.data.length - 1]);
       })
       .catch((e) => console.log(e.message));
   }, []);
-  console.log("details = ",details);
+  console.log("details = ", details);
   return (
     <div id="outerDiv">
       <div id="mainDiv">
@@ -41,7 +41,9 @@ const Resume = () => {
                   </p>
                   <div>
                     <p className="c30 title" id="h.x8fm1uorkbaw">
-                      <span className="c40">{(details?.personal?.name)?.toUpperCase()}</span>
+                      <span className="c40">
+                        {details?.personal?.name?.toUpperCase()}
+                      </span>
                     </p>
                     <p className="c7 subtitle" id="h.ymi089liagec">
                       <span className="c31">{details?.personal?.tagLine}</span>
@@ -85,6 +87,7 @@ const Resume = () => {
             </tr>
             <tr className="c29">
               <td className="c41" colSpan={1} rowSpan={1}>
+                <div>
                 <p className="c5">
                   <span className="c17 c18">PROFESSIONAL </span>
                   <span className="c17 c18">SUMMARY</span>
@@ -103,17 +106,20 @@ const Resume = () => {
                   return (
                     <>
                       <p className="c5">
-                        <span className="c8 c3">{element.name}</span>
+                        <span className="c8 c3"><a target="_blank"  href={element.liveLink}>{element.name}</a></span>
                         <span className="c3">&nbsp;</span>
                         <span className="c3">|</span>
                         <span className="c3">&nbsp;</span>
                         <span id="span3">
+                          <a target="_blank"  href={element.gitLink}>
                           <img
                             id="img3"
                             alt=""
                             src="images/image2.png"
                             href="www.youtube.com"
                           />
+                          </a>
+                          
                         </span>
                       </p>
                       <p className="c5">
@@ -148,25 +154,18 @@ const Resume = () => {
                         <span className="c3 c6">Areas of responsibility:</span>
                       </p>
                       <ul className="c21 lst-kix_es1hyzs1hy8g-0 start">
-                        <li className="c0 li-bullet-0">
-                          <span className="c1">
-                            Built authentication and integrated it with the
-                            frontend.
-                          </span>
-                        </li>
-                        <li className="c0 li-bullet-0">
-                          <span className="c1">Created the Home page. </span>
-                        </li>
-                        <li className="c0 li-bullet-0">
-                          <span className="c1">
-                            Developed a Sign In, Login page for users.
-                          </span>
-                        </li>
+                        {element.features.map((feature) => {
+                          return (
+                            <li className="c0 li-bullet-0">
+                              <span className="c1">{feature}</span>
+                            </li>
+                          );
+                        })}
                       </ul>
                       <p className="c5">
                         <span className="c1">
-                          A collaborative project built by a team of 5 executed
-                          in 5 days.
+                          {`A collaborative project built by a team of ${element.team} executed
+                          in 5 days.`}
                         </span>
                       </p>
                     </>
@@ -175,42 +174,30 @@ const Resume = () => {
                 <p className="c5 c15">
                   <span className="c1"></span>
                 </p>
+                  </div>
               </td>
               <td className="c45" colSpan={1} rowSpan={1}>
                 <p className="c38">
                   <span className="c14">EDUCATION</span>
                 </p>
-                <p className="c20">
-                  
-                </p>
-                <p className="c25">
-                  <span className="c17">Full-Stack Development</span>
-                  <span>
-                    <br />
-                    Masai School, Bangalore
-                    <br />
-                  </span>
-                  <span className="c12 c35">AUG 2021 - Present</span>
-                </p>
-                <p className="c25">
-                  <span>
-                    <br />
-                  </span>
-                  <span className="c17">B.Tech</span>
-                  <span>&nbsp;</span>
-                  <span className="c19">(CGPA- 8.40/10 )</span>
-                  <span className="c1">
-                    <br />
-                    Arvind Gavali College of
-                  </span>
-                </p>
-                <p className="c25">
-                  <span>
-                    Engineering, Satara
-                    <br />
-                  </span>
-                  <span className="c12 c35">July 2017- August 2021</span>
-                </p>
+                <p className="c20"></p>
+                {details?.education?.map((education) => {
+                  return (
+                    <>
+                      <p className="c25">
+                      <span className="c17">{education.course}</span>
+                      <span>
+                        <br />
+                        {education.institute}
+                        <br />
+                      </span>
+                      <span className="c12 c35">{education.start} - {education.end}</span>
+                    </p>
+                    <p className="c20"></p>
+                    </>
+                  );
+                })}
+
                 <p className="c22 c25">
                   <span className="c12 c35"></span>
                 </p>
@@ -235,25 +222,15 @@ const Resume = () => {
                 <div className="c38" id="h.tuxh7mwdaxox">
                   <span className="c14">ACCOMPLISHMENTS </span>
                 </div>
-                <p className="c20">
-                  <span className="c17">
-                    Filed a Patent
-                    <br />
-                  </span>
+                {details?.accomplishments?.map((accomp)=>{
+                  return (<p className="c20">
+
                   <span>
-                    Patent on Project - &nbsp;Retro fitment kit for Auto
-                    Rickshaw to convert IC engine to Electric engine, June 2021
+                    {accomp}
                   </span>
-                </p>
-                <p className="c20">
-                  <span className="c17">Sports</span>
-                  <span>
-                    &nbsp;
-                    <br />
-                    Secured the First place in a Shot Put event in Inter College
-                    Sports meet, Aurangabad, Oct 2018
-                  </span>
-                </p>
+                </p>)
+                })}
+        
                 <div className="c38" id="h59kk2i3ikr6k">
                   <span className="c14">INTERESTS</span>
                 </div>

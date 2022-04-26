@@ -717,19 +717,27 @@ h6 {
   font-size:12px;
 }
 table {
-  border: 1px solid black;
+  /* border: 1px solid black; */
+  /* width:98%; */
 }
-.c32 {
-  border: 1px solid red;
+.c41 {
+  /* border: 1px solid red; */
+  margin-left:10%;
+  width: 80%;
 }
-
+.c45{
+  /* border: 1px solid green; */
+}
+.c41>div{
+  margin-left:2%;
+}
 #userDet {
-  border: 1px solid green;
+  /* border: 1px solid green; */
   margin: 15px 10px;
 }
 
 #outerDiv {
-  border: 5px solid green;
+  /* border: 5px solid green; */
   width: 100%;
   margin:auto
 }
@@ -740,6 +748,14 @@ table {
   margin-top: 10px;
 }
 li{
-  line-height: 0.8 !important;
+  line-height: 0.6 !important;
 }
-
+*{
+  /* font-family:sans-serif !important */
+}
+#img3{
+  /* border:1px solid black; */
+}
+a{
+  color: #000000;
+}
