@@ -5,26 +5,19 @@ import Autocomplete from '@mui/material/Autocomplete';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
-import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
-import Checkbox from '@mui/material/Checkbox';
 import FormGroup from '@mui/material/FormGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Fab from '@mui/material/Fab';
-import AddIcon from '@mui/icons-material/Add';
 import EditIcon from '@mui/icons-material/Edit';
-import FavoriteIcon from '@mui/icons-material/Favorite';
-import NavigationIcon from '@mui/icons-material/Navigation';
-import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import Switch from '@mui/material/Switch';
 import Link from '@mui/material/Link';
 import GitHubIcon from '@mui/icons-material/GitHub';
 import LanguageIcon from '@mui/icons-material/Language';
-import "../form/Form.css";
-import {useContext} from "react";
-import { TokenContext } from "../context/context";
+
+import "./Form.css";
 
 var isGithubUrl = require('is-github-url');
 
@@ -36,7 +29,8 @@ const collegeTitleMaxLength = 50;
 
 const projectTitleMaxLength = 25;
 const projectIntroMaxLength = 100;
-const projectRoleMaxLength = 100;
+const projectRolesMaxLength = 150;
+const projectFeaturesMaxLength = 150;
 
 
 
@@ -45,7 +39,8 @@ const collegeTitleLabel = "College/Institue/School name (maximum " + collegeTitl
 
 const projectTitleLabel = "Project Title  (maximum " + projectTitleMaxLength + " characters) *"
 const projectIntroLabel = "Write a quick breif about project (maximum " + projectIntroMaxLength + " characters) *"
-const projectRoleLabel = "Project Roles, each separated by '.' (maximum " + projectRoleMaxLength + " characters) *"
+const projectRolesLabel = "Project Roles, each in new line (maximum " + projectRolesMaxLength + " characters) *"
+const projectFeaturesLabel = "Project Features, each in new line (maximum " + projectFeaturesMaxLength + " characters) *"
 
 
 const techStacks = ["HTML", "CSS", "JS", "React", "Express", "NodeJS", "MongoDB", "MUI", "ChakraUI"]
@@ -165,7 +160,8 @@ const Form = () => {
 
   const [projectTitle, setProjectTitle] = useState('');
   const [projectIntro, setProjectIntro] = useState('');
-  const [projectRole, setProjectRole] = useState('');
+  const [projectRoles, setProjectRoles] = useState('');
+  const [projectFeatures, setProjectFeatures] = useState('');
   const [projectGithubLink, setProjectGithubLink] = useState('');
   const [projectLiveLink, setProjectLiveLink] = useState('');
   const [projectTechStacks, setProjectTechStacks] = useState('');
@@ -203,9 +199,16 @@ const Form = () => {
       alert("Project live link should be a valid url");
       return;
     }
-    if(projectRole.length == 0)
+    if(projectRoles.length == 0)
     {
       alert("Project roles section can't be blank")
+      return;
+    }
+    let prRoles = projectRoles.split("\n");
+    // console.log(prRoles)     
+    if(prRoles.length == 0)
+    {
+      alert("Project features section can't be blank")
       return;
     }
     if(techStacks.length < 2)
@@ -213,12 +216,14 @@ const Form = () => {
       alert("Select atleast one techstacks of project");
       return;
     }
-    let roles = projectRole.split(".");
+    let features = projectFeatures.split(".");
+    let roles = projectRoles.split(".");
     let temp = {
       "title": projectTitle,
       "introduction": projectIntro,
       "githubLink": projectGithubLink,
       "liveLink": projectLiveLink,
+      "features": features,
       "roles": roles,
       "collaboration":projectCollaborated,
       "techStacks":projectTechStacks
@@ -316,23 +321,18 @@ const Form = () => {
       return
     }
     alert("Form validated")
-    
-    
-
   }
 
-  const {token} = useContext(TokenContext);
-  console.log(token);
+  
+
   return (
     <div className='form-container'>
       <div className='header-section'>
-        <div>
           <div className='proflile-img'>
             <img src={preview} />
             <div className="middle">
               <input type="file" onChange={onSelectFile} accept="image/png, image/jpeg" className="custom-file-input" />
             </div>
-          </div>
         </div>
         <div className='basic-input'>
           <div className='name-and-tagline'>
@@ -513,10 +513,23 @@ const Form = () => {
               />
               <TextField
                 size="small"
-                value={projectRole} onInput={e => setProjectRole(e.target.value)}
-                inputProps={{ maxLength: projectRoleMaxLength }}
+                value={projectFeatures} onInput={e => setProjectFeatures(e.target.value)}
+                inputProps={{ maxLength: projectFeaturesMaxLength }}
                 margin="dense"
-                label={projectRoleLabel}
+                multiline
+                rows={3}
+                label={projectFeaturesLabel}
+                id="standard-basic" type="url" variant="outlined"
+                fullWidth
+              />
+              <TextField
+                size="small"
+                value={projectRoles} onInput={e => setProjectRoles(e.target.value)}
+                multiline
+                rows={3}
+                inputProps={{ maxLength: projectRolesMaxLength }}
+                margin="dense"
+                label={projectRolesLabel}
                 id="standard-basic" type="url" variant="outlined"
                 fullWidth
               />
@@ -566,6 +579,7 @@ const Form = () => {
          <div className='display-project-section'>
          <p className='title'>{el.title}</p>
          <p className='intro'>{el.introduction}</p>
+         <p className='features'><b>Features : </b>{el.features.join(". ")}</p>
          <p className='roles'><b>Roles : </b>{el.roles.join(". ")}</p>
          <p className='collaboration'><b>Collaboration : </b>{el.collaboration ? "Yes" : "No"}</p>
          <p className='techStacks'><b>Techstacks : </b>{el.techStacks.join(", ")}</p>
@@ -594,8 +608,7 @@ const Form = () => {
             </div>
             : ""}
         </div>
-        <div>
-        
+        <div className='accomplishment-cont'>
         </div>
       </div>
      <div className='submit-btn-cont'>
