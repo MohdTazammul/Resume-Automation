@@ -98,7 +98,7 @@ const Form = () => {
   const [editEducationDataIndex, setEditEducationDataIndex] = useState(-1)
 
 
-  const [courseTitleError, setCourseTitleError] = useState(false);
+  const [courseTitleError, setCourseTitleError] = useState('');
   const [collegeNameError, setCollegeNameError] = useState(false);
   const [startDateError, setStartDateError] = useState(false);
   const [endDateError, setEndDateError] = useState(false);
@@ -126,8 +126,9 @@ const Form = () => {
 
   const addEducation = () => {
     if (courseTitle.length == 0) {
-      alert("Course/Degree title can't be blank");
-      setCourseTitleError(true)
+      // alert("Course/Degree title can't be blank");
+      setCourseTitleError("This field can't be blank")
+      console.log(courseTitleError)
       return;
     }
     if (collegeName.length == 0) {
@@ -139,7 +140,7 @@ const Form = () => {
       return;
     }
     if (startDate > endDate) {
-      alert("End date can not be erilier than start date");
+      alert("End date can not be earlier than start date");
       return;
     }
     setOpenEducationForm(false)
@@ -508,8 +509,8 @@ const Form = () => {
             >Add Education</DialogTitle>
             <DialogContent>
               <TextField
-                value={courseTitle} onInput={e => { setCourseTitle(e.target.value); setCourseTitleError(false) }}
-                helperText={""}
+                value={courseTitle} onInput={e => { setCourseTitle(e.target.value); setCourseTitleError('') }}
+                helperText={courseTitleError}
                 error={courseTitleError}
                 inputProps={{ maxLength: courseTitleMaxLength }}
                 autoFocus
