@@ -217,7 +217,7 @@ const Form = () => {
       alert("Project features section can't be blank")
       return;
     }
-    let prFeatures = projectFeatures.split("\n");
+    var prFeatures = projectFeatures.split("\n");
     if (prFeatures.length > 3) {
       alert("Maximum you can add 3 points in features of Project");
       return;
@@ -226,7 +226,7 @@ const Form = () => {
       alert("Project roles section can't be blank")
       return;
     }
-    let prRoles = projectRoles.split("\n");
+    var prRoles = projectRoles.split("\n");
     if (prRoles.length > 3) {
       alert("Maximum you can add 3 points in roles of Project");
       return;
@@ -235,22 +235,44 @@ const Form = () => {
       alert("Select atleast one techstack");
       return;
     }
-    let temp = {
-      "title": projectTitle,
-      "introduction": projectIntro,
-      "githubLink": projectGithubLink,
-      "liveLink": projectLiveLink,
-      "features": prFeatures,
-      "roles": prRoles,
-      "collaboration": projectCollaborated,
-      "techStacks": projectTechStacks
-    }
-    setProjectData([...projectData, temp]);
-    setDisplayProjectData(true);
-    setProjectTechStacks([]);
+    
+    displayProjectDetails()
     setOpenProjectForm(false)
   }
 
+
+  const displayProjectDetails = () => {
+    if(editProjectDataIndex == -1)
+    {
+      let temp = {
+        "title": projectTitle,
+        "introduction": projectIntro,
+        "githubLink": projectGithubLink,
+        "liveLink": projectLiveLink,
+        "features": projectFeatures.split("\n"),
+        "roles": projectRoles.split("\n"),
+        "collaboration": projectCollaborated,
+        "techStacks": projectTechStacks
+      }
+  
+      setProjectData([...projectData, temp]);
+     }
+     else
+     {
+      projectData[editProjectDataIndex].title = projectTitle;
+      projectData[editProjectDataIndex].introduction = projectIntro;
+      projectData[editProjectDataIndex].githubLink = projectGithubLink;
+      projectData[editProjectDataIndex].liveLink = projectLiveLink;
+      projectData[editProjectDataIndex].features = projectFeatures.split("\n");
+      projectData[editProjectDataIndex].roles = projectRoles.split("\n");
+      projectData[editProjectDataIndex].collaboration = projectCollaborated;
+      
+      projectData[editProjectDataIndex].techStacks = projectTechStacks;
+     }
+     setProjectCollaborated(false);
+     setProjectTechStacks([]);
+    setDisplayProjectData(true);
+    }  
 
 
   function validateUrl(value) {
@@ -258,15 +280,29 @@ const Form = () => {
   }
 
   function editFormButtonPress(index) {
-
     console.log(index)
-    
     setCourseTitle(educationData[index].course);
     setCollegeName(educationData[index].college);
     setStartDate(educationData[index].startDate);
     setEndDate(educationData[index].endDate);
+  }
+
+  
+  function editProjectButtonPress(index) {
+
+    console.log(index)
+    
+    setProjectTitle(projectData[index].title);
+    setProjectIntro(projectData[index].introduction);
+    setGithubLink(projectData[index].githubLink);
+    setProjectLiveLink(projectData[index].liveLink);
+    setProjectFeatures(projectData[index].features.join("\n"));
+    setProjectRoles(projectData[index].roles.join("\n"));
+    setProjectCollaborated(projectData[index].collaboration);
+    setProjectTechStacks(projectData[index].techStacks);
     // console.log(e)
   }
+
 
   function submitForm() {
     if (!selectedFile) {
@@ -626,7 +662,7 @@ const Form = () => {
                 fullWidth
               />
               <FormGroup>
-                <FormControlLabel control={<Switch onChange={(e) => { setProjectCollaborated(e.target.checked) }} />} label="Was it a Collaborative project?" />
+                <FormControlLabel control={<Switch checked={projectCollaborated} onChange={(e) => { setProjectCollaborated(e.target.checked) }} />} label="Was it a Collaborative project?" />
               </FormGroup>
 
               <Autocomplete
@@ -680,7 +716,9 @@ const Form = () => {
                   </Link>
                   <div className='edit-delete-buttons'>
                     <Fab onClick={() => {
-                      openProjectForm(true);
+                      setEditProjectDataIndex(index);
+                      editProjectButtonPress(index);
+                      setOpenProjectForm(true);
                     }} color="primary" size='small' aria-label="edit">
                       <EditIcon />
                     </Fab>
