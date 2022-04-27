@@ -95,6 +95,8 @@ const Form = () => {
   const [startDate, setStartDate] = useState('');
   const [endDate, setEndDate] = useState('');
   const [educationData, setEducationData] = useState([]);
+  const [editEducationDataIndex, setEditEducationDataIndex] = useState(-1)
+
 
   const [courseTitleError, setCourseTitleError] = useState(false);
   const [collegeNameError, setCollegeNameError] = useState(false);
@@ -103,7 +105,7 @@ const Form = () => {
 
   const [displayEducationData, setDisplayEducationData] = useState(false);
 
-  const [openEducationForm, setOpenEducationForm] = React.useState(false);
+  const [openEducationForm, setOpenEducationForm] = useState(false);
 
 
   const [displayProjectData, setDisplayProjectData] = useState(false);
@@ -114,6 +116,7 @@ const Form = () => {
       alert("You already have added three educations, can't add more")
       return;
     }
+    setEditEducationDataIndex(-1);
     setOpenEducationForm(true);
   };
 
@@ -144,6 +147,8 @@ const Form = () => {
   }
 
   const displayEducationDetails = () => {
+    if(editEducationDataIndex == -1)
+    {
     let temp = {
       "course": courseTitle,
       "college": collegeName,
@@ -151,11 +156,17 @@ const Form = () => {
       "endDate": endDate
     }
     setEducationData([...educationData, temp]);
-    setDisplayEducationData(true);
-
-
-
+     }
+     else
+     {
+      educationData[editEducationDataIndex].course = courseTitle;
+      educationData[editEducationDataIndex].college = collegeName;
+      educationData[editEducationDataIndex].startDate = startDate;
+      educationData[editEducationDataIndex].endDate = endDate;
+     }
+     setDisplayEducationData(true);
   }
+
 
   const [openProjectForm, setOpenProjectForm] = React.useState(false);
 
@@ -167,6 +178,9 @@ const Form = () => {
   const [projectLiveLink, setProjectLiveLink] = useState('');
   const [projectTechStacks, setProjectTechStacks] = useState('');
   const [projectCollaborated, setProjectCollaborated] = useState(false);
+
+  
+  const [editProjectDataIndex, setEditProjectDataIndex] = useState(-1)
 
   const [projectData, setProjectData] = useState([]);
 
@@ -243,8 +257,15 @@ const Form = () => {
     return /^(?:(?:(?:https?|ftp):)?\/\/)(?:\S+(?::\S*)?@)?(?:(?!(?:10|127)(?:\.\d{1,3}){3})(?!(?:169\.254|192\.168)(?:\.\d{1,3}){2})(?!172\.(?:1[6-9]|2\d|3[0-1])(?:\.\d{1,3}){2})(?:[1-9]\d?|1\d\d|2[01]\d|22[0-3])(?:\.(?:1?\d{1,2}|2[0-4]\d|25[0-5])){2}(?:\.(?:[1-9]\d?|1\d\d|2[0-4]\d|25[0-4]))|(?:(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)(?:\.(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)*(?:\.(?:[a-z\u00a1-\uffff]{2,})))(?::\d{2,5})?(?:[/?#]\S*)?$/i.test(value);
   }
 
-  function editFormButtonPress(e) {
-    console.log(e.target.value)
+  function editFormButtonPress(index) {
+
+    console.log(index)
+    
+    setCourseTitle(educationData[index].course);
+    setCollegeName(educationData[index].college);
+    setStartDate(educationData[index].startDate);
+    setEndDate(educationData[index].endDate);
+    // console.log(e)
   }
 
   function submitForm() {
@@ -442,7 +463,7 @@ const Form = () => {
       <hr />
       <div className='footer-section'>
         <div className='education-form'>
-          <Button className='add-btn' variant="outlined" onClick={handleOpenEducationForm}>
+          <Button className='add-btn' variant="outlined" onClick={handleOpenEducationForm }>
             Add Education
           </Button>
           <Dialog open={openEducationForm} onClose={handleCloseEducationForm}>
@@ -475,7 +496,7 @@ const Form = () => {
               />
               <div className='start-end-date'>
                 <TextField
-                  value={startDate} onInput={e => setStartDate(e.target.value)}
+                  value={ startDate} onInput={e => setStartDate(e.target.value)}
                   margin="dense"
                   id="start-date"
                   label="Start Date*"
@@ -512,7 +533,10 @@ const Form = () => {
                   <p>( {el.startDate} - {el.endDate} )</p>
                   <div className='edit-delete-buttons'>
                     <Fab onClick={() => {
-                      openEducationForm(true);
+                      setEditEducationDataIndex(index);
+                      editFormButtonPress(index);
+                      // console.log(educationData, editEducationDataIndex )
+                      setOpenEducationForm(true); 
                     }} color="primary" size='small' aria-label="edit">
                       <EditIcon />
                     </Fab>
@@ -765,3 +789,4 @@ const Form = () => {
 }
 
 export default Form
+ 
