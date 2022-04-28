@@ -17,6 +17,7 @@ import Link from '@mui/material/Link';
 import GitHubIcon from '@mui/icons-material/GitHub';
 import LanguageIcon from '@mui/icons-material/Language';
 import axios from "axios";
+import { useNavigate } from "react-router";
 import "./Form.css"
 
 var isGithubUrl = require('is-github-url');
@@ -48,7 +49,7 @@ const softSkills = ["Time management", "Communication", "Adaptability", "Problem
 
 
 const Form = () => {
-
+  const navigate = useNavigate();
 
   const [maxTechStacksRendering, setMaxTechStacksRendering] = useState(false); // maxTechStacksRendering for conditional
 
@@ -435,6 +436,9 @@ const Form = () => {
       "accomplishments": accomplishmentsTemp,
       "interests": interestsTemp
     }
+
+    
+
     // const navigate = useNavigate();
     axios.post("http://localhost:4567/resume",sendingPacket)
     .then((res)=>console.log(res))
@@ -442,6 +446,7 @@ const Form = () => {
     
     // console.log(sendingPacket);
     // alert("Data sent, check console once")
+    navigate("/downloadresume");
 
   }
 

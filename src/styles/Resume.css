@@ -748,14 +748,20 @@ table {
   margin-top: 10px;
 }
 li{
-  line-height: 0.6 !important;
+  line-height: 0.7 !important;
 }
 *{
   /* font-family:sans-serif !important */
 }
-#img3{
+.c43>div{
+  width: 90%;
   /* border:1px solid black; */
 }
+
 a{
   color: #000000;
+}
+
+.c23>div{
+  /* border:1px solid red */
 }
