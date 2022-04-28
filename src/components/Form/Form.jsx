@@ -98,10 +98,10 @@ const Form = () => {
   const [editEducationDataIndex, setEditEducationDataIndex] = useState(-1)
 
 
-  const [courseTitleError, setCourseTitleError] = useState(false);
-  const [collegeNameError, setCollegeNameError] = useState(false);
-  const [startDateError, setStartDateError] = useState(false);
-  const [endDateError, setEndDateError] = useState(false);
+  const [courseTitleError, setCourseTitleError] = useState('');
+  const [collegeNameError, setCollegeNameError] = useState('');
+  const [startDateError, setStartDateError] = useState('');
+  const [endDateError, setEndDateError] = useState('');
 
   const [displayEducationData, setDisplayEducationData] = useState(false);
 
@@ -126,20 +126,23 @@ const Form = () => {
 
   const addEducation = () => {
     if (courseTitle.length == 0) {
-      alert("Course/Degree title can't be blank");
-      setCourseTitleError(true)
+      setCourseTitleError("Course/Degree title can't be blank")
       return;
     }
     if (collegeName.length == 0) {
-      alert("College/Institue/School name can't be blank");
+      setCollegeNameError("College/Institue/School name can't be blank")
       return;
     }
-    if (startDate.length == 0 || endDate.length == 0) {
-      alert("Start date and end date can't be blank");
+    if (startDate.length == 0) {
+      setStartDateError("Start date can't be blank")
+      return;
+    }
+    if (endDate.length == 0) {
+      setEndDateError("End date can't be blank")
       return;
     }
     if (startDate > endDate) {
-      alert("End date can not be erilier than start date");
+      setEndDateError("End date can not be earlier than start date");
       return;
     }
     setOpenEducationForm(false)
@@ -147,24 +150,22 @@ const Form = () => {
   }
 
   const displayEducationDetails = () => {
-    if(editEducationDataIndex == -1)
-    {
-    let temp = {
-      "course": courseTitle,
-      "college": collegeName,
-      "startDate": startDate,
-      "endDate": endDate
+    if (editEducationDataIndex == -1) {
+      let temp = {
+        "course": courseTitle,
+        "college": collegeName,
+        "startDate": startDate,
+        "endDate": endDate
+      }
+      setEducationData([...educationData, temp]);
     }
-    setEducationData([...educationData, temp]);
-     }
-     else
-     {
+    else {
       educationData[editEducationDataIndex].course = courseTitle;
       educationData[editEducationDataIndex].college = collegeName;
       educationData[editEducationDataIndex].startDate = startDate;
       educationData[editEducationDataIndex].endDate = endDate;
-     }
-     setDisplayEducationData(true);
+    }
+    setDisplayEducationData(true);
   }
 
 
@@ -179,7 +180,7 @@ const Form = () => {
   const [projectTechStacks, setProjectTechStacks] = useState('');
   const [projectCollaborated, setProjectCollaborated] = useState(false);
 
-  
+
   const [editProjectDataIndex, setEditProjectDataIndex] = useState(-1)
 
   const [projectData, setProjectData] = useState([]);
@@ -217,7 +218,7 @@ const Form = () => {
       alert("Project features section can't be blank")
       return;
     }
-    let prFeatures = projectFeatures.split("\n");
+    var prFeatures = projectFeatures.split("\n");
     if (prFeatures.length > 3) {
       alert("Maximum you can add 3 points in features of Project");
       return;
@@ -226,7 +227,7 @@ const Form = () => {
       alert("Project roles section can't be blank")
       return;
     }
-    let prRoles = projectRoles.split("\n");
+    var prRoles = projectRoles.split("\n");
     if (prRoles.length > 3) {
       alert("Maximum you can add 3 points in roles of Project");
       return;
@@ -235,22 +236,42 @@ const Form = () => {
       alert("Select atleast one techstack");
       return;
     }
-    let temp = {
-      "title": projectTitle,
-      "introduction": projectIntro,
-      "githubLink": projectGithubLink,
-      "liveLink": projectLiveLink,
-      "features": prFeatures,
-      "roles": prRoles,
-      "collaboration": projectCollaborated,
-      "techStacks": projectTechStacks
-    }
-    setProjectData([...projectData, temp]);
-    setDisplayProjectData(true);
-    setProjectTechStacks([]);
+
+    displayProjectDetails()
     setOpenProjectForm(false)
   }
 
+
+  const displayProjectDetails = () => {
+    if (editProjectDataIndex == -1) {
+      let temp = {
+        "title": projectTitle,
+        "introduction": projectIntro,
+        "githubLink": projectGithubLink,
+        "liveLink": projectLiveLink,
+        "features": projectFeatures.split("\n"),
+        "roles": projectRoles.split("\n"),
+        "collaboration": projectCollaborated,
+        "techStacks": projectTechStacks
+      }
+
+      setProjectData([...projectData, temp]);
+    }
+    else {
+      projectData[editProjectDataIndex].title = projectTitle;
+      projectData[editProjectDataIndex].introduction = projectIntro;
+      projectData[editProjectDataIndex].githubLink = projectGithubLink;
+      projectData[editProjectDataIndex].liveLink = projectLiveLink;
+      projectData[editProjectDataIndex].features = projectFeatures.split("\n");
+      projectData[editProjectDataIndex].roles = projectRoles.split("\n");
+      projectData[editProjectDataIndex].collaboration = projectCollaborated;
+
+      projectData[editProjectDataIndex].techStacks = projectTechStacks;
+    }
+    setProjectCollaborated(false);
+    setProjectTechStacks([]);
+    setDisplayProjectData(true);
+  }
 
 
   function validateUrl(value) {
@@ -258,15 +279,29 @@ const Form = () => {
   }
 
   function editFormButtonPress(index) {
-
     console.log(index)
-    
     setCourseTitle(educationData[index].course);
     setCollegeName(educationData[index].college);
     setStartDate(educationData[index].startDate);
     setEndDate(educationData[index].endDate);
+  }
+
+
+  function editProjectButtonPress(index) {
+
+    console.log(index)
+
+    setProjectTitle(projectData[index].title);
+    setProjectIntro(projectData[index].introduction);
+    setGithubLink(projectData[index].githubLink);
+    setProjectLiveLink(projectData[index].liveLink);
+    setProjectFeatures(projectData[index].features.join("\n"));
+    setProjectRoles(projectData[index].roles.join("\n"));
+    setProjectCollaborated(projectData[index].collaboration);
+    setProjectTechStacks(projectData[index].techStacks);
     // console.log(e)
   }
+
 
   function submitForm() {
     if (!selectedFile) {
@@ -432,32 +467,24 @@ const Form = () => {
           </div>
           <hr />
           <div className='social-media-links'>
-            <table>
-              <tr>
-                <td>
-                  <input value={contact} onInput={e => setContact(e.target.value)} id='contact-input' type={"number"} placeholder={"Contact Number *"} />
-                </td>
-                <td>
-                  <input value={portfolioLink} onInput={e => setPortfolioLink(e.target.value)} id='portfolio-url-input' type={"url"} placeholder={"Portfolio Url *"} />
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <input value={emailID} onInput={e => setEmailID(e.target.value)} id='email-id-input' type={"email"} placeholder={"Email ID *"} />
-                </td>
-                <td>
-                  <input value={linkedinLink} onInput={e => setLinkedinLink(e.target.value)} id='linkedin-url-input' type={"url"} placeholder={"Linkedin Url *"} />
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <input value={address} onInput={e => setAddress(e.target.value)} id='address-input' type={"text"} placeholder={"Address *"} />
-                </td>
-                <td>
-                  <input value={githubLink} onInput={e => setGithubLink(e.target.value)} id='github-url-input' type={"url"} placeholder={"Github Url *"} />
-                </td>
-              </tr>
-            </table>
+            <div>
+              <input value={contact} onInput={e => setContact(e.target.value)} id='contact-input' type={"number"} placeholder={"Contact Number *"} />
+            </div>
+            <div>
+              <input value={portfolioLink} onInput={e => setPortfolioLink(e.target.value)} id='portfolio-url-input' type={"url"} placeholder={"Portfolio Url *"} />
+            </div>
+            <div>
+              <input value={emailID} onInput={e => setEmailID(e.target.value)} id='email-id-input' type={"email"} placeholder={"Email ID *"} />
+            </div>
+            <div>
+              <input value={linkedinLink} onInput={e => setLinkedinLink(e.target.value)} id='linkedin-url-input' type={"url"} placeholder={"Linkedin Url *"} />
+            </div>
+            <div>
+              <input value={address} onInput={e => setAddress(e.target.value)} id='address-input' type={"text"} placeholder={"Address *"} />
+            </div>
+            <div>
+              <input value={githubLink} onInput={e => setGithubLink(e.target.value)} id='github-url-input' type={"url"} placeholder={"Github Url *"} />
+            </div>
           </div>
         </div>
         <div className='input2'>
@@ -467,7 +494,7 @@ const Form = () => {
       <hr />
       <div className='footer-section'>
         <div className='education-form'>
-          <Button className='add-btn' variant="outlined" onClick={handleOpenEducationForm }>
+          <Button className='add-btn' variant="outlined" onClick={handleOpenEducationForm}>
             Add Education
           </Button>
           <Dialog open={openEducationForm} onClose={handleCloseEducationForm}>
@@ -476,8 +503,8 @@ const Form = () => {
             >Add Education</DialogTitle>
             <DialogContent>
               <TextField
-                value={courseTitle} onInput={e => { setCourseTitle(e.target.value); setCourseTitleError(false) }}
-                helperText={""}
+                value={courseTitle} onInput={e => { setCourseTitle(e.target.value); setCourseTitleError('') }}
+                helperText={courseTitleError}
                 error={courseTitleError}
                 inputProps={{ maxLength: courseTitleMaxLength }}
                 autoFocus
@@ -489,8 +516,10 @@ const Form = () => {
                 variant="outlined"
               />
               <TextField
-                value={collegeName} onInput={e => setCollegeName(e.target.value)}
+                value={collegeName} onInput={e => { setCollegeName(e.target.value); setCollegeNameError('') }}
                 inputProps={{ maxLength: collegeTitleMaxLength }}
+                error={collegeNameError}
+                helperText={collegeNameError}
                 margin="dense"
                 id="college-name"
                 label={collegeTitleLabel}
@@ -500,8 +529,10 @@ const Form = () => {
               />
               <div className='start-end-date'>
                 <TextField
-                  value={ startDate} onInput={e => setStartDate(e.target.value)}
+                  value={startDate} onInput={e => { setStartDate(e.target.value); setStartDateError('') }}
                   margin="dense"
+                  error={startDateError}
+                  helperText={startDateError}
                   id="start-date"
                   label="Start Date*"
                   type="month"
@@ -511,8 +542,10 @@ const Form = () => {
                   variant="outlined"
                 />
                 <TextField
-                  value={endDate} onInput={e => setEndDate(e.target.value)}
+                  value={endDate} onInput={e => { setEndDate(e.target.value); setEndDateError('') }}
                   margin="dense"
+                  error={endDateError}
+                  helperText={endDateError}
                   id="end-date"
                   label="End Date*"
                   type="month"
@@ -540,7 +573,7 @@ const Form = () => {
                       setEditEducationDataIndex(index);
                       editFormButtonPress(index);
                       // console.log(educationData, editEducationDataIndex )
-                      setOpenEducationForm(true); 
+                      setOpenEducationForm(true);
                     }} color="primary" size='small' aria-label="edit">
                       <EditIcon />
                     </Fab>
@@ -630,7 +663,7 @@ const Form = () => {
                 fullWidth
               />
               <FormGroup>
-                <FormControlLabel control={<Switch onChange={(e) => { setProjectCollaborated(e.target.checked) }} />} label="Was it a Collaborative project?" />
+                <FormControlLabel control={<Switch checked={projectCollaborated} onChange={(e) => { setProjectCollaborated(e.target.checked) }} />} label="Was it a Collaborative project?" />
               </FormGroup>
 
               <Autocomplete
@@ -684,7 +717,9 @@ const Form = () => {
                   </Link>
                   <div className='edit-delete-buttons'>
                     <Fab onClick={() => {
-                      openProjectForm(true);
+                      setEditProjectDataIndex(index);
+                      editProjectButtonPress(index);
+                      setOpenProjectForm(true);
                     }} color="primary" size='small' aria-label="edit">
                       <EditIcon />
                     </Fab>
@@ -793,4 +828,3 @@ const Form = () => {
 }
 
 export default Form
- 
