@@ -452,9 +452,11 @@ const Form = () => {
       <div className='header-section'>
         <div className='proflile-img'>
           <img src={preview} />
-          <div className="middle">
+          <label for="upload">Upload Avatar
+      <input type='file' id="upload" onChange={onSelectFile} /></label>
+          {/* <div className="middle">
             <input type="file" onChange={onSelectFile} accept="image/png, image/jpeg" className="custom-file-input" />
-          </div>
+          </div> */}
         </div>
         <div className='basic-input'>
           <div className='name-and-tagline'>
