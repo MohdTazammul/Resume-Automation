@@ -126,17 +126,14 @@ const Form = () => {
 
   const addEducation = () => {
     if (courseTitle.length == 0) {
-      // alert("Course/Degree title can't be blank");
       setCourseTitleError("Course/Degree title can't be blank")
       return;
     }
     if (collegeName.length == 0) {
-      // alert("College/Institue/School name can't be blank");
       setCollegeNameError("College/Institue/School name can't be blank")
       return;
     }
     if (startDate.length == 0) {
-      // alert("Start date and end date can't be blank");
       setStartDateError("Start date can't be blank")
       return;
     }
@@ -145,7 +142,6 @@ const Form = () => {
       return;
     }
     if (startDate > endDate) {
-      // alert("End date can not be earlier than start date");
       setEndDateError("End date can not be earlier than start date");
       return;
     }
@@ -154,24 +150,22 @@ const Form = () => {
   }
 
   const displayEducationDetails = () => {
-    if(editEducationDataIndex == -1)
-    {
-    let temp = {
-      "course": courseTitle,
-      "college": collegeName,
-      "startDate": startDate,
-      "endDate": endDate
+    if (editEducationDataIndex == -1) {
+      let temp = {
+        "course": courseTitle,
+        "college": collegeName,
+        "startDate": startDate,
+        "endDate": endDate
+      }
+      setEducationData([...educationData, temp]);
     }
-    setEducationData([...educationData, temp]);
-     }
-     else
-     {
+    else {
       educationData[editEducationDataIndex].course = courseTitle;
       educationData[editEducationDataIndex].college = collegeName;
       educationData[editEducationDataIndex].startDate = startDate;
       educationData[editEducationDataIndex].endDate = endDate;
-     }
-     setDisplayEducationData(true);
+    }
+    setDisplayEducationData(true);
   }
 
 
@@ -186,7 +180,7 @@ const Form = () => {
   const [projectTechStacks, setProjectTechStacks] = useState('');
   const [projectCollaborated, setProjectCollaborated] = useState(false);
 
-  
+
   const [editProjectDataIndex, setEditProjectDataIndex] = useState(-1)
 
   const [projectData, setProjectData] = useState([]);
@@ -242,15 +236,14 @@ const Form = () => {
       alert("Select atleast one techstack");
       return;
     }
-    
+
     displayProjectDetails()
     setOpenProjectForm(false)
   }
 
 
   const displayProjectDetails = () => {
-    if(editProjectDataIndex == -1)
-    {
+    if (editProjectDataIndex == -1) {
       let temp = {
         "title": projectTitle,
         "introduction": projectIntro,
@@ -261,11 +254,10 @@ const Form = () => {
         "collaboration": projectCollaborated,
         "techStacks": projectTechStacks
       }
-  
+
       setProjectData([...projectData, temp]);
-     }
-     else
-     {
+    }
+    else {
       projectData[editProjectDataIndex].title = projectTitle;
       projectData[editProjectDataIndex].introduction = projectIntro;
       projectData[editProjectDataIndex].githubLink = projectGithubLink;
@@ -273,13 +265,13 @@ const Form = () => {
       projectData[editProjectDataIndex].features = projectFeatures.split("\n");
       projectData[editProjectDataIndex].roles = projectRoles.split("\n");
       projectData[editProjectDataIndex].collaboration = projectCollaborated;
-      
+
       projectData[editProjectDataIndex].techStacks = projectTechStacks;
-     }
-     setProjectCollaborated(false);
-     setProjectTechStacks([]);
+    }
+    setProjectCollaborated(false);
+    setProjectTechStacks([]);
     setDisplayProjectData(true);
-    }  
+  }
 
 
   function validateUrl(value) {
@@ -294,11 +286,11 @@ const Form = () => {
     setEndDate(educationData[index].endDate);
   }
 
-  
+
   function editProjectButtonPress(index) {
 
     console.log(index)
-    
+
     setProjectTitle(projectData[index].title);
     setProjectIntro(projectData[index].introduction);
     setGithubLink(projectData[index].githubLink);
@@ -471,32 +463,24 @@ const Form = () => {
           </div>
           <hr />
           <div className='social-media-links'>
-            <table>
-              <tr>
-                <td>
-                  <input value={contact} onInput={e => setContact(e.target.value)} id='contact-input' type={"number"} placeholder={"Contact Number *"} />
-                </td>
-                <td>
-                  <input value={portfolioLink} onInput={e => setPortfolioLink(e.target.value)} id='portfolio-url-input' type={"url"} placeholder={"Portfolio Url *"} />
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <input value={emailID} onInput={e => setEmailID(e.target.value)} id='email-id-input' type={"email"} placeholder={"Email ID *"} />
-                </td>
-                <td>
-                  <input value={linkedinLink} onInput={e => setLinkedinLink(e.target.value)} id='linkedin-url-input' type={"url"} placeholder={"Linkedin Url *"} />
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <input value={address} onInput={e => setAddress(e.target.value)} id='address-input' type={"text"} placeholder={"Address *"} />
-                </td>
-                <td>
-                  <input value={githubLink} onInput={e => setGithubLink(e.target.value)} id='github-url-input' type={"url"} placeholder={"Github Url *"} />
-                </td>
-              </tr>
-            </table>
+            <div>
+              <input value={contact} onInput={e => setContact(e.target.value)} id='contact-input' type={"number"} placeholder={"Contact Number *"} />
+            </div>
+            <div>
+              <input value={portfolioLink} onInput={e => setPortfolioLink(e.target.value)} id='portfolio-url-input' type={"url"} placeholder={"Portfolio Url *"} />
+            </div>
+            <div>
+              <input value={emailID} onInput={e => setEmailID(e.target.value)} id='email-id-input' type={"email"} placeholder={"Email ID *"} />
+            </div>
+            <div>
+              <input value={linkedinLink} onInput={e => setLinkedinLink(e.target.value)} id='linkedin-url-input' type={"url"} placeholder={"Linkedin Url *"} />
+            </div>
+            <div>
+              <input value={address} onInput={e => setAddress(e.target.value)} id='address-input' type={"text"} placeholder={"Address *"} />
+            </div>
+            <div>
+              <input value={githubLink} onInput={e => setGithubLink(e.target.value)} id='github-url-input' type={"url"} placeholder={"Github Url *"} />
+            </div>
           </div>
         </div>
         <div className='input2'>
@@ -506,7 +490,7 @@ const Form = () => {
       <hr />
       <div className='footer-section'>
         <div className='education-form'>
-          <Button className='add-btn' variant="outlined" onClick={handleOpenEducationForm }>
+          <Button className='add-btn' variant="outlined" onClick={handleOpenEducationForm}>
             Add Education
           </Button>
           <Dialog open={openEducationForm} onClose={handleCloseEducationForm}>
@@ -541,7 +525,7 @@ const Form = () => {
               />
               <div className='start-end-date'>
                 <TextField
-                  value={ startDate} onInput={e => {setStartDate(e.target.value); setStartDateError('')}}
+                  value={startDate} onInput={e => { setStartDate(e.target.value); setStartDateError('') }}
                   margin="dense"
                   error={startDateError}
                   helperText={startDateError}
@@ -554,7 +538,7 @@ const Form = () => {
                   variant="outlined"
                 />
                 <TextField
-                  value={endDate} onInput={e => {setEndDate(e.target.value); setEndDateError('')}}
+                  value={endDate} onInput={e => { setEndDate(e.target.value); setEndDateError('') }}
                   margin="dense"
                   error={endDateError}
                   helperText={endDateError}
@@ -585,7 +569,7 @@ const Form = () => {
                       setEditEducationDataIndex(index);
                       editFormButtonPress(index);
                       // console.log(educationData, editEducationDataIndex )
-                      setOpenEducationForm(true); 
+                      setOpenEducationForm(true);
                     }} color="primary" size='small' aria-label="edit">
                       <EditIcon />
                     </Fab>
@@ -840,4 +824,3 @@ const Form = () => {
 }
 
 export default Form
- 

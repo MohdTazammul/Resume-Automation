@@ -95,15 +95,11 @@
 }
 
 .social-media-links {
-    display: flex;
-    justify-content: center;
-    /* border: 1px solid red; */
+    display: grid;
+    grid-template-columns: repeat(2, auto);
+    justify-content: space-between;
 }
-.social-media-links table{
-  border: none !important;
-  width: 100% !important;
-}
-  .social-media-links input{
+.social-media-links input{
     height: 35px;
     width: 21vw;
     margin-top: 10px;
@@ -115,8 +111,7 @@
   .social-media-links #contact-input
 {
     background: url("https://api.iconify.design/fluent/call-20-filled.svg") no-repeat left;
-    background-position: 10px;
-    
+    background-position: 10px;   
 }
   .social-media-links #portfolio-url-input
 {
