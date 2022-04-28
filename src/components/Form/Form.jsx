@@ -99,9 +99,9 @@ const Form = () => {
 
 
   const [courseTitleError, setCourseTitleError] = useState('');
-  const [collegeNameError, setCollegeNameError] = useState(false);
-  const [startDateError, setStartDateError] = useState(false);
-  const [endDateError, setEndDateError] = useState(false);
+  const [collegeNameError, setCollegeNameError] = useState('');
+  const [startDateError, setStartDateError] = useState('');
+  const [endDateError, setEndDateError] = useState('');
 
   const [displayEducationData, setDisplayEducationData] = useState(false);
 
@@ -127,20 +127,26 @@ const Form = () => {
   const addEducation = () => {
     if (courseTitle.length == 0) {
       // alert("Course/Degree title can't be blank");
-      setCourseTitleError("This field can't be blank")
-      console.log(courseTitleError)
+      setCourseTitleError("Course/Degree title can't be blank")
       return;
     }
     if (collegeName.length == 0) {
-      alert("College/Institue/School name can't be blank");
+      // alert("College/Institue/School name can't be blank");
+      setCollegeNameError("College/Institue/School name can't be blank")
       return;
     }
-    if (startDate.length == 0 || endDate.length == 0) {
-      alert("Start date and end date can't be blank");
+    if (startDate.length == 0) {
+      // alert("Start date and end date can't be blank");
+      setStartDateError("Start date can't be blank")
+      return;
+    }
+    if (endDate.length == 0) {
+      setEndDateError("End date can't be blank")
       return;
     }
     if (startDate > endDate) {
-      alert("End date can not be earlier than start date");
+      // alert("End date can not be earlier than start date");
+      setEndDateError("End date can not be earlier than start date");
       return;
     }
     setOpenEducationForm(false)
@@ -522,8 +528,10 @@ const Form = () => {
                 variant="outlined"
               />
               <TextField
-                value={collegeName} onInput={e => setCollegeName(e.target.value)}
+                value={collegeName} onInput={e => { setCollegeName(e.target.value); setCollegeNameError('') }}
                 inputProps={{ maxLength: collegeTitleMaxLength }}
+                error={collegeNameError}
+                helperText={collegeNameError}
                 margin="dense"
                 id="college-name"
                 label={collegeTitleLabel}
@@ -533,8 +541,10 @@ const Form = () => {
               />
               <div className='start-end-date'>
                 <TextField
-                  value={ startDate} onInput={e => setStartDate(e.target.value)}
+                  value={ startDate} onInput={e => {setStartDate(e.target.value); setStartDateError('')}}
                   margin="dense"
+                  error={startDateError}
+                  helperText={startDateError}
                   id="start-date"
                   label="Start Date*"
                   type="month"
@@ -544,8 +554,10 @@ const Form = () => {
                   variant="outlined"
                 />
                 <TextField
-                  value={endDate} onInput={e => setEndDate(e.target.value)}
+                  value={endDate} onInput={e => {setEndDate(e.target.value); setEndDateError('')}}
                   margin="dense"
+                  error={endDateError}
+                  helperText={endDateError}
                   id="end-date"
                   label="End Date*"
                   type="month"
