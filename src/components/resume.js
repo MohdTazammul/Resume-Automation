@@ -63,8 +63,8 @@ const Resume = () => {
                       LinkedIn-{" "}
                     </span>
                     <span className="c8 c19 c26">
-                      <a className="c27" href="#">
-                        {details?.personal?.linkedin}
+                      <a className="c27" target="_blank" href={details?.personal?.linkedin}>
+                        {details?.personal?.name}
                       </a>
                     </span>
                     <span className="c12 c10">&nbsp;</span>
@@ -76,8 +76,8 @@ const Resume = () => {
                     <span className="c10">Github</span>
                     <span className="c10">- </span>
                     <span className="c8 c19 c26">
-                      <a className="c27" href="#">
-                        {details?.personal?.github}
+                      <a className="c27" target="_blank" href={details?.personal?.github}>
+                        {details?.personal?.name}
                       </a>
                     </span>
                     <span className="c10">&nbsp;</span>
