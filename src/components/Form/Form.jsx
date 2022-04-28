@@ -16,7 +16,7 @@ import Switch from '@mui/material/Switch';
 import Link from '@mui/material/Link';
 import GitHubIcon from '@mui/icons-material/GitHub';
 import LanguageIcon from '@mui/icons-material/Language';
-
+import axios from "axios";
 import "./Form.css"
 
 var isGithubUrl = require('is-github-url');
@@ -344,7 +344,7 @@ const Form = () => {
     }
     let interestsTemp = studentInterests.split(",");
     if (interestsTemp.length > 5) {
-      alert("Maximum you can add 5 accomplishments in your resume");
+      alert("Maximum you can add 5 interests in your resume");
       return;
     }
 
@@ -379,9 +379,9 @@ const Form = () => {
     })
 
     // console.log(projectArray);
-
+    var userId = JSON.parse(localStorage.getItem("loggedinUser"))
     var sendingPacket = {
-      "user": "",
+      "user": userId,
       "personal": {
         "profilePic": selectedFile.name,
         "name": studentName,
@@ -400,9 +400,13 @@ const Form = () => {
       "accomplishments": accomplishmentsTemp,
       "interests": interestsTemp
     }
-
-    console.log(sendingPacket);
-    alert("Data sent, check console once")
+    // const navigate = useNavigate();
+    axios.post("http://localhost:4567/resume",sendingPacket)
+    .then((res)=>console.log(res))
+    .catch((e)=>console.log(e.message));
+    
+    // console.log(sendingPacket);
+    // alert("Data sent, check console once")
 
   }
 
