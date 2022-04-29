@@ -306,74 +306,74 @@ const Form = () => {
 
 
   async function submitForm() {
-    // if (!selectedFile) {
-    //   alert("Please upload the profile image");
-    //   return
-    // }
-    // var imgSize = Math.round(selectedFile.size / 1024); // In MB
-    // if (imgSize > profileMaxSize) {
-    //   alert("File is too big, please select a file of size less than " + Math.round(profileMaxSize / 1024) + " MB");
-    //   return
-    // }
-    // if (imgSize < profileMinSize) {
-    //   alert("File is too small, please select a file of size greater than " + profileMinSize + " KB");
-    //   return
-    // }
-    // // console.log(selectedFile);
-    // if (studentName == "") {
-    //   alert("Name field can't be blank")
-    //   return
-    // }
-    // if (tagline == "") {
-    //   alert("tagline can't be blank")
-    //   return
-    // }
-    // var phoneno = /^\d{10}$/;
-    // if (!contact.match(phoneno)) {
-    //   alert("Enter a valid contact number")
-    //   return
-    // }
-    // if (!(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(emailID))) {
-    //   alert("Enter a valid Email ID")
-    //   return
-    // }
-    // if (address == "") {
-    //   alert("Address can't be blank")
-    //   return
-    // }
-    // if (!validateUrl(portfolioLink)) {
-    //   alert("Enter a valid portfolio link")
-    //   return
-    // }
-    // if (!validateUrl(linkedinLink)) {
-    //   alert("Enter a valid linkedin profile link")
-    //   return
-    // }
-    // if (!isGithubUrl(githubLink)) {
-    //   alert("Enter a valid github profile link")
-    //   return
-    // }
+    if (!selectedFile) {
+      alert("Please upload the profile image");
+      return
+    }
+    var imgSize = Math.round(selectedFile.size / 1024); // In MB
+    if (imgSize > profileMaxSize) {
+      alert("File is too big, please select a file of size less than " + Math.round(profileMaxSize / 1024) + " MB");
+      return
+    }
+    if (imgSize < profileMinSize) {
+      alert("File is too small, please select a file of size greater than " + profileMinSize + " KB");
+      return
+    }
+    // console.log(selectedFile);
+    if (studentName == "") {
+      alert("Name field can't be blank")
+      return
+    }
+    if (tagline == "") {
+      alert("tagline can't be blank")
+      return
+    }
+    var phoneno = /^\d{10}$/;
+    if (!contact.match(phoneno)) {
+      alert("Enter a valid contact number")
+      return
+    }
+    if (!(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(emailID))) {
+      alert("Enter a valid Email ID")
+      return
+    }
+    if (address == "") {
+      alert("Address can't be blank")
+      return
+    }
+    if (!validateUrl(portfolioLink)) {
+      alert("Enter a valid portfolio link")
+      return
+    }
+    if (!validateUrl(linkedinLink)) {
+      alert("Enter a valid linkedin profile link")
+      return
+    }
+    if (!isGithubUrl(githubLink)) {
+      alert("Enter a valid github profile link")
+      return
+    }
 
-    // if (about.length < 100) {
-    //   alert("write atleast 100 characters in about section")
-    //   return
-    // }
-    // if (educationData.length == 0) {
-    //   alert("Add atleast one Education")
-    //   return
-    // }
-    // if (projectData.length == 0) {
-    //   alert("Add atleast one Project")
-    //   return
-    // }
-    // if (studentTechStacks.length == 0) {
-    //   alert("Add atleast one tech stack in your resume");
-    //   return;
-    // }
-    // if (studentSoftSkills.length == 0) {
-    //   alert("Add atleast one soft skill in your resume");
-    //   return;
-    // }
+    if (about.length < 100) {
+      alert("write atleast 100 characters in about section")
+      return
+    }
+    if (educationData.length == 0) {
+      alert("Add atleast one Education")
+      return
+    }
+    if (projectData.length == 0) {
+      alert("Add atleast one Project")
+      return
+    }
+    if (studentTechStacks.length == 0) {
+      alert("Add atleast one tech stack in your resume");
+      return;
+    }
+    if (studentSoftSkills.length == 0) {
+      alert("Add atleast one soft skill in your resume");
+      return;
+    }
 
     let accomplishmentsTemp = studentAccomplishment.split("\n");
     if (accomplishmentsTemp.length > 3) {
@@ -397,21 +397,23 @@ const Form = () => {
           method: "POST",
           body: data,
         })
-          .then((res) => res.json())
-          // .then((data) => {
-          //  return data.url.toString();
-          // })
-          .catch((err) => console.log(err))
+        .then((response)=>response.json())
+        .then((responseJson)=>{return responseJson});
+          // .then((res) => res.json())
+          // // .then((data) => {
+          // //  return data.url.toString();
+          // // })
+          // .catch((err) => console.log(err))
+
+          // console.log("processing");
     };
   
 
     const ProfileImg = await postDetails();
-
-    // console.log(ProfileImg)
-    setStudentProfile(ProfileImg.url.toString());
-
-    console.log(studentProfile);
-    console.log("After")
+    // console.log("profileImg", ProfileImg)
+    // setStudentProfile(ProfileImg.url.toString());
+    // console.log("studentProfile", studentProfile);
+    // console.log("studentProfile raw", ProfileImg.url.toString());
     // FORM is completely validated and good to go to the backend
 
     let educationArray = []
@@ -446,7 +448,7 @@ const Form = () => {
     var sendingPacket = {
       "user": userId,
       "personal": {
-        "profilePic": studentProfile,
+        "profilePic": ProfileImg.url.toString(),
         "name": studentName,
         "tagLine": tagline,
         "email": emailID,
@@ -466,18 +468,24 @@ const Form = () => {
 
     console.log(sendingPacket)
 
-    // const navigate = useNavigate();
-    fetch("http://localhost:4567/resume",{
-      headers:{
-        "content-type":"application/json"
-      },
-      data:JSON.stringify(sendingPacket)
-    })
-    .then((res)=>res.json()).then((res)=>console.log(res))
-    .catch((e)=>console.log(e.message));
+    const navigate = useNavigate();
+    axios.post("http://localhost:4567/resume", sendingPacket)
+    .then((response) => {
+      console.log(response);
+    }, (error) => {
+      console.log(error);
+    });
+    // fetch("http://localhost:4567/resume",{
+    //   headers:{
+    //     "content-type":"application/json"
+    //   },
+    //   data:JSON.stringify(sendingPacket)
+    // })
+    // .then((res)=>res.json()).then((res)=>console.log(res))
+    // .catch((e)=>console.log(e.message));
     
-    // alert("Data sent, check console once")
-    // navigate("/downloadresume");
+    alert("Data sent, check console once")
+    navigate("/downloadresume");
 
   }
 
