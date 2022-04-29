@@ -36,7 +36,7 @@ const Resume = () => {
                 <div style={{ display: "flex" }}>
                   <p className="c44  c46">
                     <span id="span2">
-                      <img id="img2" alt="" src="images/image3.jpg" title="" />
+                      <img id="img2" alt="" src={details?.personal?.profilePic} title="" />
                     </span>
                   </p>
                   <div>
