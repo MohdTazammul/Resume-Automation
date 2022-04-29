@@ -26,7 +26,7 @@ const resumeSchema = mongoose.Schema({
       features: [{ type: String, required: true }],
       techStack: [{ type: String, required: true }],
       areasOfResp: [{ type: String, required: true }],
-      solo: false,
+      solo: {type:Boolean, reuired:false},
       team: { type: Number, required: false },
     }],
       education: [
