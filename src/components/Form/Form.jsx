@@ -468,7 +468,7 @@ const Form = () => {
 
     console.log(sendingPacket)
 
-    const navigate = useNavigate();
+    
     axios.post("http://localhost:4567/resume", sendingPacket)
     .then((response) => {
       console.log(response);
@@ -484,7 +484,7 @@ const Form = () => {
     // .then((res)=>res.json()).then((res)=>console.log(res))
     // .catch((e)=>console.log(e.message));
     
-    alert("Data sent, check console once")
+    // alert("Data sent, check console once")
     navigate("/downloadresume");
 
   }
