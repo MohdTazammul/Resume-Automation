@@ -16,6 +16,13 @@ console.log(path.join(__dirname, "../../public"));
 app.use("/resume", ResumeController);
 app.use("/user", UserController);
 
+app.get("", (req, res) => {
+    try {
+    } catch (e) {
+      res.send(e.message);
+    }
+  });
+
 
 app.listen(PORT, ()=>{
     connect();
