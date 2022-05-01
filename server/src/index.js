@@ -1,7 +1,7 @@
 const express = require("express");
 const connect = require("../src/configs/db");
 require("dotenv").config();
-const PORT = process.env.PORT || 4567;
+const PORT = process.env.PORT || 4444;
 const app = express();
 const path=require("path")
 const ResumeController = require("./controllers/resume.controller");
