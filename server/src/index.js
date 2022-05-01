@@ -11,13 +11,16 @@ var cors = require('cors')
 app.use(cors());
 
 app.use(express.json());
-app.use(express.static(path.join(__dirname, "../../public")));
+
+app.use(express.static(path.join(__dirname, "../../")));
+
 console.log(path.join(__dirname, "../../public"));
 app.use("/resume", ResumeController);
 app.use("/user", UserController);
 
-app.get("", (req, res) => {
+app.get("/", (req, res) => {
     try {
+      res.send("Home")
     } catch (e) {
       res.send(e.message);
     }
