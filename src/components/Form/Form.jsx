@@ -182,6 +182,13 @@ const Form = () => {
   const [projectTechStacks, setProjectTechStacks] = useState('');
   const [projectCollaborated, setProjectCollaborated] = useState(false);
 
+  
+
+  const [projectTitleError, setProjectTitleError] = useState('');
+  const [projectIntroError, setProjectIntroError] = useState('');
+  const [projectRolesError, setProjectRolesError] = useState('');
+  const [projectFeaturesError, setProjectFeaturesError] = useState('');
+
 
   const [editProjectDataIndex, setEditProjectDataIndex] = useState(-1)
 
