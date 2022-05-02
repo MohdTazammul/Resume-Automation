@@ -215,15 +215,15 @@ const Form = () => {
       return;
     }
     if (projectIntro.length == 0) {
-      alert("Project about section can't be blank");
+      setProjectIntroError("Project about section can't be blank");
       return;
     }
     if (!isGithubUrl(projectGithubLink)) {
-      alert("Github repository link should be a valid url");
+      setProjectGithubLinkError("Github repository link should be a valid url");
       return;
     }
     if (!validateUrl(projectLiveLink)) {
-      alert("Project live link should be a valid url");
+      setProjectLiveLinkError("Project live link should be a valid url");
       return;
     }
     if (projectFeatures.length == 0) {
@@ -672,7 +672,12 @@ const Form = () => {
                 variant="outlined"
               />
               <TextField
-                value={projectIntro} onInput={e => setProjectIntro(e.target.value)}
+                value={projectIntro}  onInput={e => {
+                  setProjectIntro(e.target.value);
+                  setProjectIntroError('');
+                }}
+                helperText={projectIntroError}
+                error={projectIntroError}
                 inputProps={{ maxLength: projectIntroMaxLength }}
                 margin="dense"
                 id="name"
@@ -684,7 +689,12 @@ const Form = () => {
                 variant="outlined"
               />
               <TextField
-                value={projectGithubLink} onInput={e => setProjectGithubLink(e.target.value)}
+                value={projectGithubLink}  onInput={e => {
+                  setProjectGithubLink(e.target.value);
+                  setProjectGithubLinkError('');
+                }}
+                helperText={projectGithubLinkError}
+                error={projectGithubLinkError}
                 size="small"
                 margin="dense"
                 id="name"
@@ -694,7 +704,12 @@ const Form = () => {
                 variant="outlined"
               />
               <TextField
-                value={projectLiveLink} onInput={e => setProjectLiveLink(e.target.value)}
+                value={projectLiveLink}  onInput={e => {
+                  setProjectLiveLink(e.target.value);
+                  setProjectLiveLinkError('');
+                }}
+                helperText={projectLiveLinkError}
+                error={projectLiveLinkError}
                 size="small"
                 margin="dense"
                 label="Enter your project live link"
