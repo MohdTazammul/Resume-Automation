@@ -188,6 +188,9 @@ const Form = () => {
   const [projectIntroError, setProjectIntroError] = useState('');
   const [projectRolesError, setProjectRolesError] = useState('');
   const [projectFeaturesError, setProjectFeaturesError] = useState('');
+  const [projectGithubLinkError, setProjectGithubLinkError] = useState('');
+  const [projectLiveLinkError, setProjectLiveLinkError] = useState('');
+  const [projectTechStacksError, setProjectTechStacksError] = useState('');
 
 
   const [editProjectDataIndex, setEditProjectDataIndex] = useState(-1)
