@@ -199,7 +199,7 @@ const Form = () => {
 
   const handleOpenProjectForm = () => {
     if (projectData.length == 2) {
-      alert("You have already added two projects, can't add more")
+      alert("You have already added two projects, can't add more");
       return;
     }
     setOpenProjectForm(true);
@@ -211,7 +211,7 @@ const Form = () => {
 
   const addProject = () => {
     if (projectTitle.length == 0) {
-      alert("Project title can't be blank");
+      setProjectTitleError("Title field can't be blank");
       return;
     }
     if (projectIntro.length == 0) {
@@ -655,7 +655,12 @@ const Form = () => {
             <DialogTitle>Add Project</DialogTitle>
             <DialogContent>
               <TextField
-                value={projectTitle} onInput={e => setProjectTitle(e.target.value)}
+                value={projectTitle} onInput={e => {
+                  setProjectTitle(e.target.value);
+                  setProjectTitleError('');
+                }}
+                helperText={projectTitleError}
+                error={projectTitleError}
                 size="small"
                 inputProps={{ maxLength: projectTitleMaxLength }}
                 autoFocus
