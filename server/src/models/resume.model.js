@@ -29,6 +29,13 @@ const resumeSchema = mongoose.Schema({
       solo: {type:Boolean, reuired:false},
       team: { type: Number, required: false },
     }],
+    workEx:[{
+      start:{type:String},
+      end:{type:String},
+      position:{type:String},
+      organisation:{type:String},
+      description:[{type:String,}],
+    }],
       education: [
         {
           course: {type:String, required:true},
