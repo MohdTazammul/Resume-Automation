@@ -100,6 +100,7 @@ router.post("/forgot-password", async(req, res)=>{
                     }
                 } )
             send_email(req.body.email, random_password);
+            res.send("Please check your email for new password!")
         }
         else{
             res.send({err:"Email not available!"});
