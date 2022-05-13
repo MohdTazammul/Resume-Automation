@@ -11,6 +11,7 @@
     "@testing-library/jest-dom": "^5.16.4",
     "@testing-library/react": "^12.1.4",
     "@testing-library/user-event": "^13.5.0",
+    "aws-sdk": "^2.1135.0",
     "axios": "^0.26.1",
     "bcryptjs": "^2.4.3",
     "cloudinary": "^1.29.1",
