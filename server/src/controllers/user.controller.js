@@ -45,7 +45,7 @@ async(req, res)=>{
         }
         
         let user = await User.find({email:req.body.email});
-        // console.log(user);
+        
         if(user.length>0){
             return res.send("User already exists, try another email");
         }
