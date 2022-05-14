@@ -6,7 +6,7 @@ const router  = express.Router();
 router.post("", async(req, res)=>{
     try{
         const resume = await Resume.create(req.body);
-        console.log(resume)
+        console.log(resume);
         res.send(resume);
     }
     catch(e){
