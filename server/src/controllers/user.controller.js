@@ -1,7 +1,12 @@
+// import {send_email} from "./aws-utils";
+// send_email = require("./aws_utils");
 const express = require("express");
 const User = require("../models/user.model");
 const router = express.Router();
 const jwt = require("jsonwebtoken");
+var crypto = require("crypto");
+var AWS = require('aws-sdk');
+
 require("dotenv").config();
 const {body, validationResult} = require("express-validator");
 
@@ -61,7 +66,7 @@ router.post("/login", async(req, res)=>{
 
         if(user.length==0){
             
-            return res.send({err:"User do not exist, Please try creating an account"});
+            return res.send({err:"User does not exist, Please try creating an account"});
         }
         if(user[0].checkPassword(req.body.password)){
             
@@ -77,5 +82,77 @@ router.post("/login", async(req, res)=>{
     }
 });
 
+
+router.post("/forgot-password", async(req, res)=>{
+    try{
+        const user = await User.find({email:req.body.email});
+
+        if(user.length===0){
+            return res.send({err:"User does not exist, Please try creating an account"});
+        }
+        if(user[0].email){
+            var random_password = crypto.randomBytes(6).toString('hex');
+
+            User.updateOne({email: req.body.email}, 
+                {
+                    $set: {
+                        password: random_password,
+                    }
+                } )
+            send_email(req.body.email, random_password);
+            res.send("Please check your email for new password!")
+        }
+        else{
+            res.send({err:"Email not available!"});
+        }
+    }
+    catch(e){
+        res.send(e.message);
+    }
+});
+
+function send_email(email, password){
+    AWS.config.update({region: 'ap-south-1'});
+
+    var params = {
+    Destination: { /* required */
+        ToAddresses: [
+        email,
+        ]
+    },
+    Message: { /* required */
+        Body: { /* required */
+        Html: {
+        Charset: "UTF-8",
+        Data: "Your new password is " + password
+        },
+        Text: {
+        Charset: "UTF-8",
+        Data: "Your new password is " + password,
+        }
+        },
+        Subject: {
+        Charset: 'UTF-8',
+        Data: 'Password Reset'
+        }
+        },
+    Source: 'lohit@masaischool.com',
+    };
+
+    // Create the promise and SES service object
+    var sendPromise = new AWS.SES({apiVersion: '2010-12-01'}).sendEmail(params).promise();
+
+    // Handle promise's fulfilled/rejected states
+    sendPromise.then(
+    function(data) {
+        console.log(data.MessageId);
+        return;
+    }).catch(
+        function(err) {
+        console.error(err, err.stack);
+        return;
+    });
+
+}
 
 module.exports=router;
