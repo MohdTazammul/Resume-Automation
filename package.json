@@ -22,7 +22,7 @@
     "node": ">=16.0.0"
   },
   "scripts": {
-    "start": "nodemon server/src/index.js"
+    "start": "node server/src/index.js"
   },
   "eslintConfig": {
     "extends": [
