@@ -130,14 +130,6 @@ router.post("/forgot-password", async (req, res) => {
     }
     if (user[0].email) {
         let token = newToken(user[0]);
-    //   var random_password = crypto.randomBytes(6).toString("hex");
-    //   var hash = bcrypt.hashSync(random_password, 8);
-
-    //   const thisUser = await User.findOneAndUpdate(
-    //     { email: req.body.email },
-    //     { password: hash },
-    //     { new: true }
-    //   );
 
       send_email(req.body.email, token);
       return res.send("Email sent successfully");
@@ -169,6 +161,7 @@ function send_email(email, token) {
     
     mailTransporter.sendMail(mailDetails, function(err, data) {
         if(err) {
+            console.log(err)
             console.log('Error Occurs');
         } else {
             console.log('Email sent successfully');
