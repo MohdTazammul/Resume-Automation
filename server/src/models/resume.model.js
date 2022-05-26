@@ -13,6 +13,7 @@ const resumeSchema = mongoose.Schema({
     email: { type: String, required: true },
     mob: { type: String, required: true },
     linkedin: { type: String, required: true },
+    portfolio: { type: String},
     address: { type: String, required: true },
     github: { type: String, required: true },
   },
