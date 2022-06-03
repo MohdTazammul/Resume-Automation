@@ -6,6 +6,7 @@
     "aws-sdk": "^2.1135.0",
     "axios": "^0.26.1",
     "bcryptjs": "^2.4.3",
+    "broken-link-checker": "^0.7.8",
     "concurrently": "^7.1.0",
     "cors": "^2.8.5",
     "dotenv": "^16.0.0",
@@ -13,6 +14,7 @@
     "express-validator": "^6.14.0",
     "jsonwebtoken": "^8.5.1",
     "jspdf": "^2.5.1",
+    "link-check": "^5.1.0",
     "mongoose": "^6.2.10",
     "multer": "^1.4.4",
     "nodemailer": "^6.7.5"
