@@ -17,7 +17,8 @@
     "link-check": "^5.1.0",
     "mongoose": "^6.2.10",
     "multer": "^1.4.4",
-    "nodemailer": "^6.7.5"
+    "nodemailer": "^6.7.5",
+    "zoho-node-mailer": "^1.0.6"
   },
   "engines": {
     "npm": ">=7.0.0",
