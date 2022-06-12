@@ -1,11 +1,9 @@
-// import {send_email} from "./aws-utils";
-// send_email = require("./aws_utils");
+
 const nodemailer = require("nodemailer")
 const express = require("express");
 const User = require("../models/user.model");
 const router = express.Router();
 const jwt = require("jsonwebtoken");
-var crypto = require("crypto");
 const bcrypt = require("bcryptjs");
 require("dotenv").config();
 
@@ -54,10 +52,8 @@ router.post(
       return true;
     }),
   body("password")
-    .isStrongPassword()
-    .withMessage(
-      "Password must contain uppercase and lowercase character, number and special symbols, password must be 8 characters long"
-    ),
+    .isLength({min:4})
+    .withMessage("Password should be of atleast 4 characters"),
   async (req, res) => {
     try {
       let errors = validationResult(req);
