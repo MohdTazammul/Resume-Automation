@@ -65,7 +65,7 @@ router.post(
       const { valid, reason, validators } = await isEmailValid(req.body.email);
 
       if (!valid) {
-        return res.status(400).send({
+        return res.send({
           message: "Please provide a valid email address.",
           reason: validators[reason].reason,
         });
