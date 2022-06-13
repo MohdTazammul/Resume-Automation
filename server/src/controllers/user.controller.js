@@ -6,6 +6,12 @@ const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 require("dotenv").config();
 
+const emailValidator = require("deep-email-validator");
+
+async function isEmailValid(email) {
+  return emailValidator.validate(email);
+}
+
 function verifyToken(token) {
   return new Promise((resolve, reject) => {
     jwt.verify(token, `${process.env.MY_KEY}`, (err, user) => {
@@ -42,7 +48,6 @@ router.post(
     .withMessage("Enter correct email format")
     .custom(async (value) => {
       const user = await User.find({ email: value }).lean().exec();
-      console.log(user);
       if (user.length > 0) {
         throw new Error("Email already exist, try another");
       }
@@ -57,6 +62,14 @@ router.post(
       if (errors.errors.length > 0) {
         return res.send(errors);
       }
+      const { valid, reason, validators } = await isEmailValid(req.body.email);
+
+      if (!valid) {
+        return res.status(400).send({
+          message: "Please provide a valid email address.",
+          reason: validators[reason].reason,
+        });
+      }
 
       let user = await User.find({ email: req.body.email });
 
@@ -66,7 +79,7 @@ router.post(
 
       user = await User.create(req.body);
       let token = newToken(user);
-      res.send({ user, token });
+      return res.send({ user, token });
     } catch (e) {
       res.send(e.message);
     }
@@ -132,37 +145,34 @@ router.post("/forgot-password", async (req, res) => {
 });
 
 function send_email(email, token) {
-
-
   let mailTransporter = nodemailer.createTransport({
     host: "smtp-mail.outlook.com", // hostname
     secureConnection: false, // TLS requires secureConnection to be false
     port: 587, // port for secure SMTP
     tls: {
-       ciphers:'SSLv3'
+      ciphers: "SSLv3",
     },
     auth: {
-        user: 'theabhishek1802@outlook.com',
-        pass: 'Abhishek@Masai'
-    }
+      user: "theabhishek1802@outlook.com",
+      pass: "Abhishek@Masai",
+    },
   });
 
   let mailDetails = {
-      from: 'theabhishek1802@outlook.com',
-      to: email,
-      subject: 'Password Update',
-      text: `https://tempresume.vercel.app/forgot-password/${token}`
+    from: "theabhishek1802@outlook.com",
+    to: email,
+    subject: "Password Update",
+    text: `https://tempresume.vercel.app/forgot-password/${token}`,
   };
 
-  mailTransporter.sendMail(mailDetails, function(err, data) {
-      if(err) {
-          console.log(err)
-          console.log('Error Occurs');
-      } else {
-          console.log('Email sent successfully');
-      }
+  mailTransporter.sendMail(mailDetails, function (err, data) {
+    if (err) {
+      console.log(err);
+      console.log("Error Occurs");
+    } else {
+      console.log("Email sent successfully");
+    }
   });
-
 }
 
 module.exports = router;
