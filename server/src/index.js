@@ -17,6 +17,15 @@ app.use(express.static(path.join(__dirname, "../../")));
 app.use("/resume", ResumeController);
 app.use("/user", UserController);
 
+app.get("/health-check", (req, res)=>{
+  try{
+    res.send("Server Up")
+  }
+  catch(e){
+    res.send(e.message);
+  }
+})
+
 app.get("/", (req, res) => {
   try {
     res.send("Home");
