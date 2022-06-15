@@ -44,22 +44,27 @@ router.post("", async (req, res) => {
       let urlGit = elem.gitLink[0];
 
       let res = await linkCheckAsync(urlLive);
-      if (res !== 200) obj.projects[i].liveLink[1] = false;
+      if (res !== 200) {
+        obj.projects[i].liveLink[1] = false;
+        flag = false;
+      }
 
       let res2 = await linkCheckAsync(urlGit);
-      if (res2 !== 200) obj.projects[i].gitLink[1] = false;
+      if (res2 !== 200) {
+        obj.projects[i].gitLink[1] = false;
+        flag = false;
+      }
       i++;
     }
 
     if (!flag) {
       console.log(obj);
-      return res.send({err:"Wrong Link",obj});
+      return res.send({ err: "Wrong Link", obj });
     } else {
       const resume = await Resume.create(req.body);
       console.log(resume);
       return res.send(resume);
     }
-
   } catch (e) {
     console.log(e.message);
     res.send(e.message);
