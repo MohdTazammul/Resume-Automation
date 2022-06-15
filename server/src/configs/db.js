@@ -2,5 +2,5 @@ const mongoose = require("mongoose");
 
 
 module.exports = async ()=>{
-    await mongoose.connect("mongodb+srv://production-server:xDYolWakwgtsRvj9@cluster0.9iuol.mongodb.net/?retryWrites=true&w=majority")
+    await mongoose.connect("mongodb+srv://resume-app:tazammul@cluster0.uoq3f.mongodb.net/Resume-Automation-DB?retryWrites=true&w=majority")
 }
