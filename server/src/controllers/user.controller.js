@@ -162,7 +162,7 @@ function send_email(email, token) {
     from: "theabhishek1802@outlook.com",
     to: email,
     subject: "Password Update",
-    text: `https://tempresume.vercel.app/forgot-password/${token}`,
+    text: `https://resume.masaischool.com/forgot-password/${token}`,
   };
 
   mailTransporter.sendMail(mailDetails, function (err, data) {
