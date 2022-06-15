@@ -62,14 +62,14 @@ router.post(
       if (errors.errors.length > 0) {
         return res.send(errors);
       }
-      const { valid, reason, validators } = await isEmailValid(req.body.email);
+      // const { valid, reason, validators } = await isEmailValid(req.body.email);
 
-      if (!valid) {
-        return res.send({
-          message: "Please provide a valid email address.",
-          reason: validators[reason].reason,
-        });
-      }
+      // if (!valid) {
+      //   return res.send({
+      //     message: "Please provide a valid email address.",
+      //     reason: validators[reason].reason,
+      //   });
+      // }
 
       let user = await User.find({ email: req.body.email });
 
